@@ -1,0 +1,49 @@
+
+MVP (Minimum Viable Product) Feature
+------------------------------------
+
+Features
+    1.  Authentication
+    2.  Onboarding
+    3.  Study Plan Creation
+    4.  Study Session Generation
+    5.  Concept Explainer
+    6.  Progress Tracking (basic)
+
+
+1. Authentication
+    Sign Up
+    OTP
+    Login
+
+2. Onboarding
+    Name
+    Email
+    Phone no.
+    -------------------------------------------------
+    Topic
+    Current level
+    Learning pace
+    Study days & time
+    -------------------------------------------------
+    Age group
+    Background stream
+    Goal
+
+3️. Study Plan Creation
+    Topic
+    Sub-Topic 
+
+4️. Study Session Generation
+    Warm-up
+    Core explanation
+    Guided examples
+    Active recall
+    Reinforcement
+    Summary
+
+5️. Concept Explainer
+    Explains concepts in a simple, step-by-step manner, adapting explanations when the learner feels confused or needs re-explanation.
+
+6️. Progress Tracking (Basic)
+    Tracks completed sessions, time spent, and learning consistency to show learners their progress and motivate continuous learning.

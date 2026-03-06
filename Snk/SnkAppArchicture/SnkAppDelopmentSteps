@@ -1,0 +1,169 @@
+Perfect 🚀 Shashank!
+We’ll build the simplest **React Native + AWS Amplify** app that can **upload/download files to S3** from Android storage.
+
+---
+
+## 🛠 Step 1: Prerequisites
+
+1. **Install Node.js & npm** (latest LTS) → [https://nodejs.org](https://nodejs.org)
+2. **Install React Native CLI**:
+
+   ```bash
+   npm install -g react-native-cli
+   ```
+3. **Install Amplify CLI**:
+
+   ```bash
+   npm install -g @aws-amplify/cli
+   amplify configure
+   ```
+
+   * During `amplify configure`, link it to your AWS account.
+   * It will create an **IAM user** for Amplify.
+
+---
+
+## 🛠 Step 2: Create React Native Project
+
+```bash
+npx react-native init S3SyncApp
+cd S3SyncApp
+```
+
+Run once to test:
+
+```bash
+npx react-native run-android
+```
+
+👉 This opens a blank app on your Android phone/emulator.
+
+---
+
+## 🛠 Step 3: Initialize Amplify
+
+Inside project folder:
+
+```bash
+amplify init
+```
+
+* Choose defaults → confirm.
+* Amplify backend is now connected.
+
+---
+
+## 🛠 Step 4: Add S3 Storage
+
+```bash
+amplify add storage
+```
+
+* Select **Content (Images, audio, video, etc.)**
+* Give it a bucket name.
+* Allow Auth/Guest users (depending on if you want login).
+
+Push changes:
+
+```bash
+amplify push
+```
+
+This will create an S3 bucket for your app. 🎉
+
+---
+
+## 🛠 Step 5: Install Amplify Libraries
+
+In React Native project:
+
+```bash
+npm install aws-amplify @react-native-async-storage/async-storage
+```
+
+---
+
+## 🛠 Step 6: Configure Amplify in App
+
+Open `App.js` and add:
+
+```javascript
+
+import React, { useState } from 'react';
+import { Button, View, Text } from 'react-native';
+import * as DocumentPicker from 'expo-document-picker';
+import { Storage } from 'aws-amplify';
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
+
+Amplify.configure(awsExports);
+
+export default function App() {
+  const [fileUrl, setFileUrl] = useState(null);
+
+  const uploadFile = async () => {
+    const result = await DocumentPicker.getDocumentAsync({});
+    if (result.type === 'success') {
+      const response = await fetch(result.uri);
+      const blob = await response.blob();
+      await Storage.put(result.name, blob);
+      alert('Uploaded: ' + result.name);
+    }
+  };
+
+  const downloadFile = async (fileName) => {
+    const url = await Storage.get(fileName);
+    setFileUrl(url);
+  };
+
+  return (
+    <View style={{ marginTop: 50, padding: 20 }}>
+      <Button title="Upload File" onPress={uploadFile} />
+      <Button title="Download File" onPress={() => downloadFile('yourFileName.txt')} />
+      {fileUrl && <Text>Download URL: {fileUrl}</Text>}
+    </View>
+  );
+}
+```
+
+---
+
+## 🛠 Step 7: Run the App
+
+```bash
+npx react-native run-android
+```
+
+* Tap **Upload File** → choose a file → it uploads to your S3 bucket.
+* Tap **Download File** → retrieves file URL from S3.
+
+---
+
+✅ Congrats! You now have a basic **Android app syncing with S3** using Amplify.
+Later, you can:
+
+* Add **auto-sync** for a folder.
+* Add **authentication** (AWS Cognito).
+* Add **delete/rename** functions.
+
+---
+
+👉 Shashank, should I also show you how to **auto-sync a whole folder from Android storage to S3** (like your original AWS CLI `sync` idea), or keep it simple with file upload/download first?
+
+
+--------------------------------------------------------------------------------
+
+MY NOTES
+
+install Node.js
+
+setup react project
+
+install java
+
+use Admin access keys in aws amplify otherwise many access deny error
+
+npx react-native start --reset-cache
+
+
+

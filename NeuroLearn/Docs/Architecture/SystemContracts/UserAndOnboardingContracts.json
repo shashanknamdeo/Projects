@@ -1,0 +1,155 @@
+
+// USER CONTRACTS (Core Identity Layer)
+// ------------------------------------
+
+// 1. User Identity Contract 
+
+// Source: AWS Cognito
+// Purpose: Establish trusted user identity
+
+// Input (HTTP Header)
+// Authorization: Bearer <JWT_TOKEN>
+
+// Backend Extracts
+{
+  "cognito_user_id": "string",
+  "email": "string | null",
+  "phone": "string | null"
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+
+// 2. User Creation / Fetch Contract
+
+// Used in backend internal tasks (when request "GET /auth/me" or "POST /onboarding/learning-info" etc)
+
+{
+  "user_id": "UUID",
+  "cognito_user_id": "string",
+  "email": "string",
+  "phone": "string",
+  "onboarding_status": "NOT_STARTED | IN_PROGRESS | COMPLETED",
+  "created_at": "timestamp"
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+
+// 3. Auth State Contract (Backend → Frontend)
+
+{
+  "is_authenticated": true,
+  "onboarding_status": "NOT_STARTED"
+}
+
+
+// ___________________________________________________________________________________________________
+
+
+// ONBOARDING CONTRACTS (Learning Context Layer)
+// ---------------------------------------------
+
+
+// 1. Personal Info 
+
+// 1.1 Frontend → Backend
+
+// Note: Auth already has email/phone.
+
+// POST /onboarding/personal-info
+
+{
+  "name": "Shashank"
+}
+
+// ______________________________________________
+
+// 1.2 Backend → Frontend
+
+{
+  "status": "SUCCESS",
+  "next_step": "LEARNING_INFO"
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+
+// 2. Learning Info 
+
+// 2.1 Frontend → Backend
+
+// POST /onboarding/learning-info
+
+{
+  "topic": "Data Structures",
+  "current_level": "Beginner",
+  "learning_pace": "Slow",
+  "study_days": 30,
+  "daily_time_minutes": 60
+}
+
+// ______________________________________________
+
+// 2.2 Backend → Frontend
+{
+  "status": "SUCCESS",
+  "next_step": "HELPING_INFO"
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+
+// 3. Helping Info (Frontend → Backend)
+
+// POST /onboarding/helping-info
+
+{
+  "age_group": "18-25",
+  "background_stream": "Engineering",
+  "goal": "Crack technical interviews"
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+
+// 4. Onboarding Completion Contract
+
+// 4.1 Backend Internal State
+
+{
+  "onboarding_status": "COMPLETED",
+  "ready_for_ai_planning": true
+}
+
+// 4.2 Backend → Frontend
+
+{
+  "status": "COMPLETED",
+  "message": "Your learning journey is ready"
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+
+// 5. ONBOARDING → AI HANDOFF CONTRACT (Backend → AI)
+
+// This is the bridge between user intent and AI intelligence.
+
+{
+  "user_context": {
+    "topic": "Data Structures",
+    "current_level": "Beginner",
+    "learning_pace": "Slow",
+    "daily_time_minutes": 60,
+    "study_days": 30,
+    "background_stream": "Engineering",
+    "goal": "Crack technical interviews"
+  }
+}

@@ -1,0 +1,113 @@
+Perfect 👍 Shashank! Since amplify init is done, we can now add authentication (sign-up / sign-in) using AWS Amplify Auth (Cognito).
+
+We’ll build a simple sign-in page with email/password.
+
+🛠 Step 1: Add Authentication to Amplify
+
+In your project folder, run:
+
+amplify add auth
+
+
+Choose Default configuration → Email-based sign-up.
+
+Choose Username-based login or Email (we’ll use Email).
+
+Push changes to AWS:
+
+amplify push
+
+
+This creates an AWS Cognito User Pool for your app.
+
+🛠 Step 2: Install Amplify Auth Library
+
+If not installed already, install Amplify libraries:
+
+npm install aws-amplify @react-native-async-storage/async-storage
+
+🛠 Step 3: Create a Sign-In / Sign-Up Page
+
+In App.js:
+
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text, Alert } from 'react-native';
+import Amplify, { Auth } from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+
+export default function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [signedIn, setSignedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  const signUp = async () => {
+    try {
+      await Auth.signUp({ username: email, password, attributes: { email } });
+      Alert.alert('Sign-up successful! Please check your email to confirm.');
+    } catch (err) {
+      Alert.alert('Error signing up:', err.message);
+    }
+  };
+
+  const signIn = async () => {
+    try {
+      const user = await Auth.signIn(email, password);
+      setSignedIn(true);
+      setUserEmail(user.attributes.email);
+    } catch (err) {
+      Alert.alert('Error signing in:', err.message);
+    }
+  };
+
+  if (!signedIn) {
+    return (
+      <View style={{ padding: 20, marginTop: 50 }}>
+        <Text>Email:</Text>
+        <TextInput
+          placeholder="Enter email"
+          value={email}
+          onChangeText={setEmail}
+          style={{ borderWidth: 1, marginBottom: 10, padding: 5 }}
+        />
+        <Text>Password:</Text>
+        <TextInput
+          placeholder="Enter password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          style={{ borderWidth: 1, marginBottom: 10, padding: 5 }}
+        />
+        <Button title="Sign Up" onPress={signUp} />
+        <View style={{ height: 10 }} />
+        <Button title="Sign In" onPress={signIn} />
+      </View>
+    );
+  }
+
+  return (
+    <View style={{ padding: 20, marginTop: 50 }}>
+      <Text>Welcome, {userEmail}!</Text>
+      <Text>You are signed in.</Text>
+    </View>
+  );
+}
+
+🛠 Step 4: Test the App
+
+Run the app:
+
+npx react-native run-android
+
+
+On the app:
+
+Enter email & password → tap Sign Up → check your email to confirm (Cognito sends confirmation).
+
+Then tap Sign In → you should see Welcome, your email!
+
+✅ Now your app has a working login system using AWS Cognito + Amplify.
+Next, we can combine this with S3 file upload/download, so only logged-in users can sync their files.
+
+Shashank, do you want me to add S3 file upload/download to this sign-in app next?

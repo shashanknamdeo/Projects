@@ -1,0 +1,137 @@
+
+// 1. Frontend → Backend Contract
+
+// POST /api/study-plan/create
+
+{
+  "topic": "Data Structures and Algorithms",
+
+  "current_level": "Beginner",
+  "learning_pace": "Slow",
+
+  "study_schedule": {
+    "total_days": 30,
+    "daily_time_minutes": 60
+  },
+
+  "age_group": "18-25",
+  "background_stream": "Engineering",
+  "goal": "Crack technical interviews"
+}
+
+
+// ___________________________________________________________________________________________________
+
+// 2. Backend → AI
+
+{
+  "prompt_type": "STUDY_PLAN_GENERATION",
+
+  "learner_profile": {
+    "age_group": "18-25",
+    "background_stream": "Engineering",
+    "current_level": "Beginner",
+    "learning_pace": "Slow"
+  },
+
+  "learning_objective": {
+    "topic": "Data Structures and Algorithms",
+    "goal": "Crack technical interviews"
+  },
+
+  "time_constraints": {
+    "total_days": 30,
+    "daily_time_minutes": 60
+  }
+}
+
+
+// ___________________________________________________________________________________________________
+
+
+// 3 AI -> Backend 
+
+// I think option 1 is better
+
+// Option 1
+
+{
+  "plan_version": "v1",
+  "subject": "string",
+  "total_days": "number",
+  "daily_time_minutes": "number",
+  "schedule": [
+    {
+      "start_day": "number",
+      "end_day": "number",
+      "topic_id": "string",
+      "topic_name": "string",
+      "difficulty": "number (1-5)"
+    }
+  ]
+}
+
+
+// ----------------------------------------------
+
+// Option 2
+
+{
+  "plan_version": "v1",
+
+  "overview": {
+    "topic": "Data Structures and Algorithms",
+    "goal_alignment": "Interview preparation",
+    "estimated_completion_days": 30
+  },
+
+  "plan_structure": [
+    {
+      "phase": "Foundation",
+      "start_day": 1,
+      "end_day": 10,
+      "focus": "Core concepts and basics"
+    },
+    {
+      "phase": "Intermediate",
+      "start_day": 11,
+      "end_day": 20,
+      "focus": "Common problem-solving techniques"
+    },
+    {
+      "phase": "Application",
+      "start_day": 21,
+      "end_day": 30,
+      "focus": "Interview-oriented practice"
+    }
+  ],
+
+  "daily_plan": [
+    {
+      "day": 1,
+      "topic": "Introduction to Data Structures",
+      "estimated_time_minutes": 60
+    },
+    {
+      "day": 2,
+      "topic": "Arrays and their operations",
+      "estimated_time_minutes": 60
+    }
+  ]
+}
+
+
+// ___________________________________________________________________________________________________
+
+
+// Idempotency Contract (Recommended)
+
+// Header
+
+// Idempotency-Key: <uuid>
+
+// If the same request is sent multiple times, the system should create the result only once. usefull when
+    // Mobile network retry
+    // User taps button twice
+    // Frontend timeout & retry
+    // Backend crash & retry

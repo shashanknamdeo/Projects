@@ -1,0 +1,13 @@
+at Autosync
+    connect AutoSync duration UI (Days , Hours, Minutes) with Autosync
+    when Sync manually set last sync time 
+
+at installing app
+    create Snk folder
+
+at sign up
+    create user folder at cloud
+
+change local snk manifest path
+
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/

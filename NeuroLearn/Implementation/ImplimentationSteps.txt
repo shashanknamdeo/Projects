@@ -1,0 +1,54 @@
+
+Install python 3.11.9
+
+Make virtal envronment at D:\Material\AppDevelopment\NeuroLearn\Implementation\Backend\PythonVirtualEnvironment
+
+Django version = 5.2.10
+
+pip install django djangorestframework psycopg2-binary python-dotenv django-cors-headers
+    Typical Use Case for This Stack
+        Django backend
+        REST API
+        PostgreSQL database
+        Secure environment variables
+        Frontend–backend communication
+
+pip freeze > requirements.txt
+    Save package version in a file
+        AWS Elastic Beanstalk installs dependencies from this file
+        Anyone can remake the same environment
+        Ensures same versions everywhere
+
+django-admin startproject config .
+    django-admin
+        Django’s command-line tool
+        Used to create projects, apps, migrations, etc.
+    startproject
+        Tells Django    :   “Create a new project (global configuration)”
+    config
+        This is the project name, NOT an app
+        Contains settings, urls, server config
+    . (dot at the end)
+        Create files in the current folder
+
+Split Setting.py into
+    base.py
+    dev.py
+    prod.py
+
+Create apps
+    user
+    onboarding
+    study_plan
+    study_session
+    feedback
+    progress
+
+Create and Setup .env file for keeping Secrets (access keys, password)
+
+Download, Install and Setup PostgreSQL (version = 15.15)
+
+Connect PostgreSQL to Django
+
+
+

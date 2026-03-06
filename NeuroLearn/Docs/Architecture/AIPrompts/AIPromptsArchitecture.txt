@@ -1,0 +1,168 @@
+
+How All Prompts Work Together
+
+User Goal
+   ↓
+Topic Planner
+   ↓
+Subtopic Creation
+   ↓
+Session Structure
+   ↓
+(If confused → Re-Explanation Prompt)
+
+-------------------------------------------------
+
+
+Topic Planning Prompt
+   Purpose:
+          Decides what to teach at a high level.
+          What it does:
+          Breaks a user’s goal into main topics
+   Considers:
+          Time (days, minutes per day)
+          Current level
+          Learning pace
+   Goal
+          exam
+          job
+          curiosity
+   Why it exists:
+        So users don’t need to know what topics to choose — AI does curriculum design.
+
+-------------------------------------------------
+
+
+Subtopic Generation Prompt
+    Purpose:
+        Decides how to divide each topic into learnable pieces.
+    What it does:
+        Breaks one topic into:
+        Logical
+        Progressive
+        Small subtopics
+    Ensures:
+        No big jumps
+        Beginner-friendly flow
+    Why it exists:
+        Large topics overwhelm learners. This makes learning step-by-step.
+
+-------------------------------------------------
+
+
+Session Creation Prompt
+    Purpose:
+        Decides how a single study session is organized and generate explanation, example, summary, question etc
+    What it does:
+        Divides 60 minutes into:
+        Warm-up
+        Core explanation
+        Guided examples
+        Active recall
+        Reinforcement
+        Summary
+    Why it exists:
+        Learning is not just explanation — it needs repetition and reflection.
+
+-------------------------------------------------
+
+
+Re-Explanation Prompt (Confusion Handler)
+    Purpose:
+        Helps when the learner doesn’t understand something.
+    What it does:
+        Focuses on one confusion point
+    Explains it:
+        More simply
+        With a different analogy
+        Without adding new theory
+        Reassures the learner
+    Why it exists:
+        Most students fail because no one re-explains properly.
+
+___________________________________________________________________________________________________
+
+Future Enhancement
+------------------
+
+How All Prompts Work Together
+
+User Goal
+   ↓
+Topic Planner
+   ↓
+Subtopic Generator
+   ↓
+Session Structure
+   ↓
+Lesson Generator
+   ↓
+Active Recall
+   ↓
+Reinforcement
+   ↓
+Summary
+   ↓
+(If confused → Re-Explanation Prompt)
+
+
+Master Lesson Generation Prompt
+Purpose:
+Actually teaches the lesson.
+What it does:
+Generates:
+Explanations
+Examples
+Questions
+Recaps
+Adjusts language based on:
+Pace (slow / fast)
+Level (beginner / advanced)
+Age group
+Why it exists:
+This is the main teaching engine of NeuroLearn.
+📌 Teacher analogy:
+“The teacher explaining on the board.”
+
+Active Recall Prompt
+Purpose:
+Checks whether learning actually happened.
+What it does:
+Asks:
+Simple questions
+Fill-in-the-blanks
+Explain-in-your-own-words tasks
+Why it exists:
+Reading ≠ Learning. Recall strengthens memory.
+📌 Teacher analogy:
+“Tell me what you understood.”
+
+Reinforcement Prompt
+Purpose:
+Makes learning stick.
+What it does:
+Gives:
+Extra examples
+Small practice tasks
+Real-life applications
+Why it exists:
+Without reinforcement, learning fades quickly.
+📌 Teacher analogy:
+“Let’s practice this a bit more.”
+
+Summary Prompt
+Purpose:
+Closes the learning loop.
+What it does:
+Compresses the lesson into:
+Key ideas
+Simple takeaways
+Helps long-term retention
+Why it exists:
+The brain remembers end points best.
+📌 Teacher analogy:
+“Today we learned three important things…”
+
+
+QUIZ PROMPT
+-----------

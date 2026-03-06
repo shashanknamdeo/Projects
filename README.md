@@ -25,6 +25,21 @@ This repository acts as a **technical portfolio for recruiters and collaborators
 
 ---
 
+## Why These Projects Exist
+
+These projects were developed with the goal of **practical learning, skill development, and solving real-world problems**. Each project allowed me to explore different aspects of modern software engineering:
+
+- **Backend Development:** Designing scalable, modular, and maintainable server-side systems using Python and Django.  
+- **AI/ML Integration:** Applying AI and machine learning to create intelligent features, such as resume matching, predictive trading signals, and study assistants.  
+- **Cloud Deployment:** Learning to deploy and manage applications on AWS, including EC2, S3, RDS, and Amplify.  
+- **Automation & Data Processing:** Building workflows and pipelines for scraping, analysis, and background task processing.  
+- **Full-Stack & Mobile Development:** Integrating front-end technologies like React and React Native with backend services to create responsive applications.  
+- **Real-World Problem Solving:** Creating projects that solve practical challenges, from job search automation to file synchronization and voice-based AI interactions.
+
+Each project reflects **intentional learning and hands-on experience** with industry-standard technologies, preparing me for professional backend and AI development roles.
+
+---
+
 ## Tech Stack
 
 Python | Django | PostgreSQL | AWS | Docker | React | React Native | Celery | Redis | REST APIs
@@ -47,6 +62,15 @@ Python | Django | PostgreSQL | AWS | Docker | React | React Native | Celery | Re
 
 ---
 
+## Featured Projects
+
+⭐ **HireIQ** – Automated job application platform using Django, Selenium, and NLP-based resume matching.
+
+⭐ **NeuroLearn** – AI-powered study assistant generating study plans and quizzes using LLM APIs.
+
+⭐ **IntelliTrade** – AI trading analytics platform with real-time data and predictive models.
+
+---
 ## 1. HireIQ
 📁 **Project Folder:** [View Project](./HireIQ)
 
@@ -166,7 +190,7 @@ SNK App is a **mobile file synchronization and backup system** that manages file
 ---
 
 ## Repository Structure
-
+```
 Projects
 │
 ├── HireIQ
@@ -174,7 +198,7 @@ Projects
 ├── NeuroLearn
 ├── Gossipy
 └── SNK-App
-
+```
 
 Each project folder contains its own **source code, documentation, and setup instructions**.
 
@@ -192,4 +216,7 @@ LinkedIn: https://linkedin.com/in/shashanknamdeo28
 
 ## License
 
-This repository is licensed under the **MIT License**.
+This repository and its contents are the **exclusive property of Shashank Namdeo**.  
+All rights are reserved. No part of this code, documentation, or materials may be copied, modified, distributed, or used without explicit written permission.
+
+For permission requests, contact: shashanknamdeo28@gmail.com

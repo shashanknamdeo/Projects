@@ -1,0 +1,176 @@
+
+// 1. User Signup Contract (Frontend → Cognito)
+
+// 1.1 Frontend → Cognito (Signup Request)
+
+{
+  "name": "Shashank",
+  "email": "user@example.com",
+  "phone_number": "+919876543210",
+  "password": "StrongPassword@123",
+}
+
+// 1.2 Cognito → Frontend (Signup Response)
+
+{
+  "status": "PENDING_VERIFICATION",
+  "cognito_user_id": "abc-123"
+}
+
+// User Verification Contract (OTP) ---------------------------------------------------------------
+
+// 1.3 Frontend → Cognito (OTP Verification Request)
+
+{
+  "cognito_user_id": "abc-123",
+  "otp": "123456"
+}
+
+// 1.4 Cognito → Frontend (OTP Verification Response)
+
+{
+  "status": "VERIFIED"
+}
+
+// ________________________________________________________________________________________________
+
+// 2.  Login Contract
+
+// 2.1 Frontend → Cognito (Login)
+
+{
+  "auth_method": "EMAIL | PHONE",
+  "email": "user@email.com",
+  "phone": "+91XXXXXXXXXX",
+  "password": "********"
+}
+
+// If Email -> {  "auth_method": "EMAIL",  "email": "user@email.com",  "phone": None,  "password": "********"}
+// if Phone -> {  "auth_method": "PHONE",  "email": None,  "phone": "+91XXXXXXXXXX",  "password": "********"}
+
+// ----------------------------------------------
+
+// 2.2 Cognito → Frontend (JWT Tokens)
+
+{
+  "access_token": "jwt_access_token",
+  "id_token": "jwt_id_token",
+  "refresh_token": "jwt_refresh_token",
+  "expires_in": 3600
+}
+
+// ________________________________________________________________________________________________
+
+
+// 3. HTTP Header
+
+// with every HTTP request
+
+// Authorization: Bearer <access_token>
+
+
+// ________________________________________________________________________________________________
+
+// 4.  Token Validation Contract (Backend → Cognito)
+
+// Purpose: Trust verification
+
+// Backend responsibilities:
+//   Verify token signature
+//   Validate expiration
+//   Extract claims
+
+// Token Claims Extracted
+
+{
+  "sub": "cognito_user_id",
+  "email": "user@email.com",
+  "phone_number": "+91XXXXXXXXXX"
+}
+
+// ________________________________________________________________________________________________
+
+// 6. Backend User Provisioning Contract (Backend → Database)
+
+// Condition -> If Cognito user does not exist in DB
+
+{
+  "cognito_user_id": "abc-123",
+  "email": "user@email.com",
+  "phone": "+91XXXXXXXXXX",
+  "onboarding_completed": false,
+  "account_status": "ACTIVE"
+}
+
+// ________________________________________________________________________________________________
+
+// 7. Auth Status Contract
+
+// Frontend → Backend
+
+// GET /auth/me
+// Authorization: Bearer <access_token>
+
+// ----------------------------------------------
+
+// Backend → Frontend
+
+{
+  "authenticated": true,
+  "user": {
+    "id": "uuid",
+    "name": null,
+    "email": "user@email.com",
+    "phone": "+91XXXXXXXXXX",
+    "onboarding_completed": false
+  }
+}
+
+
+// ________________________________________________________________________________________________
+
+
+// Token Refresh Contract
+
+// Frontend → Cognito
+
+{
+  "refresh_token": "jwt_refresh_token"
+}
+
+// ----------------------------------------------
+
+// Cognito → Frontend
+
+{
+  "access_token": "new_jwt_access_token",
+  "expires_in": 3600
+}
+
+
+// ________________________________________________________________________________________________
+
+
+// Error Handling Contract (STANDARD)
+
+// Invalid Token
+
+{
+  "error_code": "AUTH_401",
+  "message": "Invalid or expired token"
+}
+
+// Account Disabled
+
+{
+  "error_code": "AUTH_403",
+  "message": "Account disabled"
+}
+
+// ________________________________________________________________________________________________
+
+// Logout Contract (In future)
+
+// For now
+//    Delete tokens from local storage
+//    Stop sending Authorization header

@@ -1,0 +1,46 @@
+
+{
+  "name": "Shashank",
+  "topic": "Data Structures",
+  "current_level": "Beginner",
+  "learning_pace": "Slow & detailed",
+  "study_schedule": {
+    "total_study_days": 5,
+    "study_minutes_per_day": 60
+  },
+  "age_group": "23–30",
+  "stream": "Science / Engineering",
+  "goal": "job"
+}
+
+
+You are an AI study planner.
+
+CRITICAL INSTRUCTIONS:
+- Return ONLY valid JSON
+- Do NOT include greetings
+- Do NOT include explanations
+- Do NOT include markdown
+- Do NOT include extra text
+
+JSON SCHEMA (STRICT):
+
+{
+  "plan_version": "v1",
+  "subject": "string",
+  "total_days": number,
+  "daily_time_minutes": number,
+  "schedule": [
+    {
+      "start_day": number,
+      "end_day": number,
+      "topic_id": "string",
+      "topic_name": "string",
+      "difficulty": number (1-5)
+    }
+  ]
+}
+
+RULES:
+- Days must cover exactly total_days
+- Topics must be ordered from basic to advanced

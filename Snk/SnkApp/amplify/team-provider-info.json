@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-snkapp-dev-cf026-authRole",
+      "UnauthRoleArn": "arn:aws:iam::347116755250:role/amplify-snkapp-dev-cf026-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::347116755250:role/amplify-snkapp-dev-cf026-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-snkapp-dev-cf026-deployment",
+      "UnauthRoleName": "amplify-snkapp-dev-cf026-unauthRole",
+      "StackName": "amplify-snkapp-dev-cf026",
+      "StackId": "arn:aws:cloudformation:ap-south-1:347116755250:stack/amplify-snkapp-dev-cf026/9f558fe0-80eb-11f0-843c-064bb159a12b",
+      "AmplifyAppId": "d1rsqq7odeps3f"
+    },
+    "categories": {
+      "auth": {
+        "snkapp0fd05c7d": {}
+      },
+      "storage": {
+        "SnkS3Storage": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+
+Use AWS Cognito for Authentication + Django Backend
+
+Profile creation and first login
+    1.  Signup → Cognito → Email Verification (User Creatiion Complete)
+    2.  Login → Cognito → JWT Token
+    3.  JWT → Django Backend
+    4.  Django verifies token locally
+    5.  Django checks user in DB
+    6.  If new → Create profile
+    7.  If existing → Load profile
+    8.  User starts learning
+
+Note : In Step 4 (Django verifies token locally)
+    Django does NOT call Cognito and ask “Is this token valid?”
+    Downloads Cognito public keys (JWKS) than Verifies JWT locally (Signature, Expiry, Issuer, Audience)
+
+-------------------------------------------------
+
+Authentication Required Info
+    Name
+    Email       (OTP Authorization)
+    Phone no.

@@ -1,0 +1,140 @@
+Awesome 🙌 Shashank — good job!
+If amplify init is successful and the Authentication (Auth) page is created, that means Amplify has already set up Cognito (Auth service) in your backend.
+
+Right now, your app is linked to AWS and ready to use S3.
+
+✅ Next Step: Add S3 Storage
+
+Since you already have Authentication, let’s add Storage (S3):
+
+amplify add storage
+
+
+Then it will ask a few questions:
+
+Please select from one of the categories → choose Content (Images, audio, video, etc.)
+
+Provide a friendly name for your resource → e.g., MyS3Storage
+
+Provide bucket name → must be unique globally, e.g., shashank-sync-bucket
+
+Who should have access → choose Auth and Guest users (if you want public + signed-in access)
+
+What kind of access → at least create/update and read.
+
+Finally push it to AWS:
+
+amplify push
+
+
+This will create an S3 bucket for your project.
+
+✅ Step: Update Your App to Use Storage
+
+After amplify push, your project will generate a file aws-exports.js.
+Now we can connect it inside your React Native app (App.js):
+
+import React, { useState } from 'react';
+import { Button, View, Text } from 'react-native';
+import * as DocumentPicker from 'expo-document-picker';
+import { Storage } from 'aws-amplify';
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
+
+Amplify.configure(awsExports);
+
+export default function App() {
+  const [fileUrl, setFileUrl] = useState(null);
+
+  const uploadFile = async () => {
+    const result = await DocumentPicker.getDocumentAsync({});
+    if (result.type === 'success') {
+      const response = await fetch(result.uri);
+      const blob = await response.blob();
+      await Storage.put(result.name, blob);
+      alert('Uploaded: ' + result.name);
+    }
+  };
+
+  const downloadFile = async (fileName) => {
+    const url = await Storage.get(fileName);
+    setFileUrl(url);
+  };
+
+  return (
+    <View style={{ marginTop: 50, padding: 20 }}>
+      <Button title="Upload File" onPress={uploadFile} />
+      <Button title="Download File" onPress={() => downloadFile('yourFileName.txt')} />
+      {fileUrl && <Text>Download URL: {fileUrl}</Text>}
+    </View>
+  );
+}
+
+
+✅ With this, you can pick a file from your phone → upload to S3 → download it back.
+
+👉 Do you want me to now extend this to auto-sync an entire folder (like aws s3 sync), or should we first test the single file upload/download?
+
+----------------------------------------------------------------------------------------
+
+my code
+
+Amplify.configure(awsExports);
+console.log('Storage:', AmplifyStorage);
+console.log('Amplify:', Amplify);
+
+due to import Storage error 
+i update storage to auth and gust
+which update 
+
+┌──────────┬────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name  │ Operation │ Provider plugin   │
+├──────────┼────────────────┼───────────┼───────────────────┤
+│ Auth     │ snkapp0fd05c7d │ Update    │ awscloudformation │
+├──────────┼────────────────┼───────────┼───────────────────┤
+│ Storage  │ SnkS3Storage   │ Update    │ awscloudformation │
+└──────────┴────────────────┴───────────┴───────────────────┘
+
+
+
+----------------------------------------------------------------------------------------
+
+
+at sync
+
+renew local manifest first
+
+LocalMenifest
+RemoteMenifest
+
+ListS3Files
+ListLocalFiles
+DownloadFiles   = ListS3Files - ListLocalFiles
+UploadFiles     = ListLocalFiles - ListS3Files
+CommonFiles     = Check for change of content
+recursively select the file
+    calculate MD5 value using "react-native-fs + crypto-js"
+    get etag from s3 using "getProperties" amplify v6 function
+    compare value
+        if same continue
+        elif different compare the motification time
+            Local ETag vs Manifest ETag
+            Remote ETag vs Manifest ETag
+            #
+            There are 3 possible situations:
+            1. Only local changed
+                    Local ETag ≠ Manifest ETag
+                    Remote ETag = Manifest ETag
+                    ✅ → Upload the file (local is newer).
+            2. Only remote changed
+                Remote ETag ≠ Manifest ETag
+                Local ETag = Manifest ETag
+                ✅ → Download the file (remote is newer).
+            3. Both changed
+                Local ETag ≠ Manifest ETag
+                Remote ETag ≠ Manifest ETag
+                ⚠️ Conflict → You need a resolution strategy:
+                    LastModified wins (pick whichever timestamp is newer).
+                    Keep both (rename one, e.g., file (conflict).jpg).
+                    Ask user.
+

@@ -1,0 +1,84 @@
+
+Name
+Email
+Phone no.
+
+-------------------------------------------------
+
+Topic
+Current level
+Learning pace
+Study days & time
+
+-------------------------------------------------
+
+Age group
+Background stream
+Goal
+
+___________________________________________________________________________________________________
+
+
+Current level
+-------------
+    Beginner (starting from zero or almost zero)
+    Intermediate (know the basics, but not confident)
+    Advanced (want revision or deeper understanding)
+
+
+-------------------------------------------------
+
+
+Learning pace
+-------------
+    Slow & detailed (Explain patiently, step by step)
+    Normal pace (Balanced explanation)
+    Fast & concise (Straight to the point)
+
+-------------------------------------------------
+
+
+Age group
+---------
+    Below 18
+    18–22
+    23–30
+    30+
+
+Help in decide
+    Explanation tone (examples, analogies)
+    Pace & patience 
+    UI/UX (less childish / more professional) (Optional)
+
+
+-------------------------------------------------
+
+
+Stream
+------
+    Science / Engineering
+    Arts / Humanities
+    Commerce / Finance
+    Medical / Biology
+    Other / Not sure
+
+Help in Decide:
+    Example selection (math-heavy vs real-life)
+    Assumption of prior knowledge
+    Avoids alienating non-technical learners
+
+AI behavior:
+    Arts student → fewer formulas, more intuition
+    Science student → faster abstraction, symbols allowed
+
+
+-------------------------------------------------
+
+
+Goal
+----
+    job           (Interviews, Practical skills, Industry-oriented examples, Problem-solving)
+    exam          (Theory, Definitions, Structured syllabus, Repetition)
+    career_switch (Extra basics + confidence)
+    skill_upgrade (Less theory, more depth)
+    curiosity     (Exploratory, flexible)

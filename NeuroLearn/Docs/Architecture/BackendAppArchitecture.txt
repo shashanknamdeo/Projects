@@ -1,0 +1,98 @@
+In Django
+    an app is a self-contained module with its own models, views, and logic.
+    We want modular architecture, meaning each app handles one responsibility.
+    I looked at your MVP and database structure, and divided it naturally:
+
+---------------------------------------------------------------------------------------------------
+
+Overview
+    | App           | Responsibility     | Reason for Separate App         |
+    | ------------- | ------------------ | ------------------------------- |
+    | users         | User profile       | Core auth, isolated from plans  |
+    | onboarding    | User learning info | Independent, temporary → plan   |
+    | study_plan    | AI-generated plans | Complex AI & versioning logic   |
+    | study_session | Study sessions     | Session + task management       |
+    | feedback      | User feedback      | Optional MVP+, easy to extend   |
+    | progress      | Track progress     | Analytics-ready, separate logic |
+
+---------------------------------------------------------------------------------------------------
+
+Key Design Principles Followed
+    Single Responsibility: Each app has one job
+    Modular: Easy to maintain, test, and deploy
+    Future-proof: Adding AI, quizzes, or analytics later is simple
+    Matches Database: Each app maps to one or more tables in your RDS
+
+---------------------------------------------------------------------------------------------------
+
+python manage.py startapp users apps/users
+python manage.py startapp onboarding apps/onboarding
+python manage.py startapp study_plan apps/study_plan
+python manage.py startapp study_session apps/study_session
+python manage.py startapp feedback apps/feedback
+python manage.py startapp progress apps/progress
+
+---------------------------------------------------------------------------------------------------
+
+1.  Users
+
+Responsibility:
+    User profiles and authentication metadata.
+Why separate:
+    Handles user information only (name, email, phone)
+    Can later integrate with AWS Cognito for authentication
+    Keeps profile info separate from study or AI logic
+
+-------------------------------------------------
+
+2.  onboarding
+
+Responsibility:
+    Collect and store user onboarding data.
+Why separate:
+    Onboarding data is temporary at first, then used for study plan generation
+    Includes learning info, goals, background, age, stream
+    Keeps onboarding logic independent from users and study plan
+
+-------------------------------------------------
+
+3.  study_plan
+
+Responsibility:
+    AI-generated study plans.
+Why separate:
+    AI logic and plan versions are complex
+    Stores AI_plan_versions and AI_topic_plans
+    Centralizes all plan creation, updates, and versioning
+
+-------------------------------------------------
+
+4.  study_session
+
+Responsibility:
+    Daily study sessions for the user.
+Why separate:
+    Each session has multiple tasks
+    Keeps session-related logic independent of the AI plan
+    Stores task status, timestamps, session progress
+
+-------------------------------------------------
+
+5.  feedback
+
+Responsibility:
+    Collect user feedback.
+Why separate:
+    Feedback is optional MVP+
+    Keeps feedback logic isolated, easy to extend later
+
+-------------------------------------------------
+
+6.  progress
+
+Responsibility:
+    Track user progress.
+Why separate:
+    Session completion, plan completion
+    Avoids mixing with study plan or session logic
+    Can later integrate analytics or charts
