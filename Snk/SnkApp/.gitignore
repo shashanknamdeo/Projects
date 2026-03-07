@@ -96,6 +96,8 @@ package-lock.json
 # Build artifacts
 android/app/build/
 android/app/src/main/assets/
+ios/build/
+ios/DerivedData/
 *.apk
 *.aab
 
@@ -104,6 +106,8 @@ android/app/src/main/assets/
 *.xcode.env
 *.DS_Store
 *.log
+*.tmp
+*.swp
 
 # Amplify sensitive configs
 amplify/.config/

@@ -53,8 +53,8 @@ Python | Django | PostgreSQL | AWS | Docker | React | React Native | Celery | Re
 | **HireIQ** | Automated job search and application system | Python, Django, Selenium, AWS |
 | **IntelliTrade** | AI-powered trading analytics platform | Django, React, ML |
 | **NeuroLearn** | AI-powered study assistant | Django, React, LLM APIs |
+| **SNK** | Mobile file synchronization and backup system | React Native, AWS |
 | **Gossipy** | Voice-based generative AI chat app | React Native, AWS |
-| **SNK App** | Mobile file synchronization and backup system | React Native, AWS |
 
 ---
 
@@ -66,9 +66,9 @@ Python | Django | PostgreSQL | AWS | Docker | React | React Native | Celery | Re
 
 ⭐ **HireIQ** – Automated job application platform using Django, Selenium, and NLP-based resume matching.
 
-⭐ **NeuroLearn** – AI-powered study assistant generating study plans and quizzes using LLM APIs.
-
 ⭐ **IntelliTrade** – AI trading analytics platform with real-time data and predictive models.
+
+⭐ **NeuroLearn** – AI-powered study assistant generating study plans and quizzes using LLM APIs.
 
 ---
 ## 1. HireIQ
@@ -133,31 +133,10 @@ NeuroLearn is an **AI-powered learning assistant** that helps students study eff
 
 ---
 
-## 4. Gossipy
-📁 **Project Folder:** [View Project](./Gossipy)
+## 4. SNK
+📁 **Project Folder:** [View Project](./SNK)
 
-Gossipy is a **voice-based generative AI chat application** that allows users to interact with AI using **natural voice conversations**.
-
-The system converts voice to text, generates AI responses, and converts them back into speech.
-
-### Tech Stack
-
-- **Frontend:** React Native + TypeScript  
-- **Authentication:** AWS Amplify Auth  
-- **Speech-to-Text:** AWS Transcribe  
-- **AI Generation:** Google Gemini API  
-- **Text-to-Speech:** Amazon Polly  
-- **Voice Pipeline:** Speech → Text → AI → Speech  
-- **State Management:** React Hooks  
-- **Mobile Framework:** Expo / React Native  
-- **Cloud Platform:** AWS  
-
----
-
-## 5. SNK App
-📁 **Project Folder:** [View Project](./SNK-App)
-
-SNK App is a **mobile file synchronization and backup system** that manages file storage and cloud backups while ensuring data integrity and efficient syncing.
+SNK is a **mobile file synchronization and backup system** that manages file storage and cloud backups while ensuring data integrity and efficient syncing.
 
 ### Tech Stack
 
@@ -189,6 +168,27 @@ SNK App is a **mobile file synchronization and backup system** that manages file
 
 ---
 
+## 5. Gossipy
+📁 **Project Folder:** [View Project](./Gossipy)
+
+Gossipy is a **voice-based generative AI chat application** that allows users to interact with AI using **natural voice conversations**.
+
+The system converts voice to text, generates AI responses, and converts them back into speech.
+
+### Tech Stack
+
+- **Frontend:** React Native + TypeScript  
+- **Authentication:** AWS Amplify Auth  
+- **Speech-to-Text:** AWS Transcribe  
+- **AI Generation:** Google Gemini API  
+- **Text-to-Speech:** Amazon Polly  
+- **Voice Pipeline:** Speech → Text → AI → Speech  
+- **State Management:** React Hooks  
+- **Mobile Framework:** Expo / React Native  
+- **Cloud Platform:** AWS  
+
+---
+
 ## Repository Structure
 ```
 Projects
@@ -196,9 +196,10 @@ Projects
 ├── HireIQ
 ├── IntelliTrade
 ├── NeuroLearn
-├── Gossipy
-└── SNK-App
+├── SNK
+└── Gossipy
 ```
+
 
 Each project folder contains its own **source code, documentation, and setup instructions**.
 

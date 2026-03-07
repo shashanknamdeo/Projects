@@ -1,0 +1,374 @@
+
+Install python 3.11.9
+
+Make virtal envronment at D:\Material\AppDevelopment\NeuroLearn\Implementation\Backend\PythonVirtualEnvironment
+
+Django version = 5.2.10
+
+django-admin startproject config .
+
+PostgreSQL Already install
+
+---------------------------------------------------------------------------------------------------
+
+python manage.py startapp authentication
+
+add authentication in INSTALLED_APPS List
+
+-------------------------------------------------
+
+pip install djangorestframework
+pip install djangorestframework-simplejwt
+
+-------------------------------------------------
+
+Add REST framework config in settings.py
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+-------------------------------------------------
+
+Add JWT Token Endpoints in neurolearn/urls.py
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+urlpatterns += [
+    # Login
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+    # Refresh token
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+]
+
+-------------------------------------------------
+
+Create User Registration API
+
+Create a new file: authentication/serializers.py
+
+Paste:
+
+from django.contrib.auth.models import User
+from rest_framework import serializers
+
+class RegisterSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
+
+Note : Use create_user() intead of create(), Because create_user() hashes the password.
+
+-------------------------------------------------
+
+Create Register View
+
+Open : authentication/views.py
+
+Paste : 
+
+from rest_framework import generics
+from django.contrib.auth.models import User
+from .serializers import RegisterSerializer
+from rest_framework.permissions import AllowAny
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
+
+-------------------------------------------------
+
+create 'authentication' App URLs
+
+Create : authentication/urls.py
+
+Paste :
+
+from django.urls import path
+from .views import RegisterView
+
+urlpatterns = [
+    path('register/', RegisterView.as_view(), name='register'),
+]
+
+-------------------------------------------------
+
+Connect 'authentication' App URLs to Project
+
+from django.urls import include
+
+urlpatterns += [
+    path('api/auth/', include('accounts.urls')),
+]
+
+-------------------------------------------------
+
+Run Migrations
+
+python manage.py makemigrations
+python manage.py migrate
+
+-------------------------------------------------
+
+Setup Django DRF Browsable API for API Testing
+
+Open settings.py
+
+INSTALLED_APPS += [
+    'rest_framework',
+]
+
+-------------------------------------------------
+
+Test API :
+
+Start server    : python manage.py runserver
+
+------------------------
+
+Test Registration API
+
+Go to:http://127.0.0.1:8000/api/auth/register/
+
+Fill the Form
+    username: shashank
+    email: test@test.com
+    password: 12345678
+
+Click POST
+
+Get Response : 201 (Means Success - user created)
+
+------------------------
+
+Verify using admin panel (must create a superuser first) :
+
+http://127.0.0.1:8000/admin/
+
+------------------------
+
+Test Login (JWT Token) API
+
+Go to:http://127.0.0.1:8000/api/token/
+
+Fill the Form
+    username: shashank
+    password: 12345678
+
+Click POST
+
+Get Response:
+
+{
+"refresh": "long_token_here",
+"access": "short_token_here"
+}
+
+-------------------------------------------------
+
+Change Password Field (Registration API)
+
+Currently the password may appear visible in the form.
+To fix that, update the serializer:
+
+Open : authentication/serializers.py
+
+Add 'extra_kwargs' in 'Meta' class
+
+class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+-------------------------------------------------
+
+Create Protected API (Test Auth)
+
+Open : authentication/view.py
+
+Paste :
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+
+class TestAuthView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({
+            "message": "You are authenticated"
+        })
+
+Open : authentication/urls.py
+
+urlpatterns += [
+    path('test-auth/', TestAuthView.as_view()),
+]
+
+-------------------------------------------------
+
+Test Protected API (Programmatically way : Not Ideal way but Quick)
+
+Run Python Commands :
+
+import requests
+
+# login
+login_url = "http://127.0.0.1:8000/api/token/"
+
+login_data = {
+    "username": "shashank",
+    "password": "12345678"
+}
+
+login_response = requests.post(login_url, json=login_data)
+token = login_response.json()["access"]
+
+# protected api
+protected_url = "http://127.0.0.1:8000/api/auth/test-auth/"
+
+headers = {
+    "Authorization": f"Bearer {token}"
+}
+
+response = requests.get(protected_url, headers=headers)
+
+print(response.json())
+
+------------------------
+
+Output : {'message': 'You are authenticated'}
+
+-------------------------------------------------
+
+Register request flow :
+
+POST request (urls.py -> authentication.urls.py)
+RegisterView (view.py)
+    validate data (internally in serializer)
+    save user serializer.py (internally in serializer)
+        create() (wite in serializer.py, but call under serializer.save())
+    return response (internally in serializer)
+
+
+More Detailed Request Flow : (for understanding)
+
+Client (Browser / Postman)
+HTTP Request
+POST /api/auth/register/
+Django URL Resolver
+Project urls.py
+authentication/urls.py
+RegisterView # view.py
+    CreateAPIView.create()
+        Extract POST data (request.data)
+        serializer = RegisterSerializer(data=request.data)
+        serializer.is_valid() (validates request data)
+        serializer.save()
+            RegisterSerializer.create(validated_data) # serializer.py
+                User.objects.create_user()
+                    password hashed
+                    user saved in DB
+        serializer.data (convert User model → JSON)
+        Response(serializer.data)
+    DRF builds HTTP Response
+JSON returned to client
+
+-------------------------------------------------
+
+Protected API Request Flow :
+
+Client (Browser / Postman)
+HTTP Request : GET /api/auth/test-auth/
+Project urls.py
+authentication/urls.py
+TestAuthView - APIView.dispatch()
+    initialize_request() (converts Django request → DRF Request object : To access request.data, request.user, request.auth)
+    JWTAuthentication.authenticate(request) (JWT Authentication check)
+        1. Read Authorization header
+        2. Extract token
+        3. Decode JWT
+        4. Verify signature
+        5. Check expiration
+        6. Extract user_id
+        7. Fetch user from DB
+        8. If valid : request.user = authenticated user
+    permission_classes = [IsAuthenticated]
+        IsAuthenticated.has_permission() {
+            if request.user is authenticated : Return Yes, User Authorized
+            else : Return 401 Unauthorized
+            } (JUST FOR UNDERSTANDING)
+    TestAuthView.get()
+        Response returned
+    DRF Organise response into HTTP Response (Status Code, Respnse JSON etc)
+
+
+---------------------------------------------------------------------------------------------------
+
+pip install django djangorestframework psycopg2-binary python-dotenv django-cors-headers
+    Typical Use Case for This Stack
+        Django backend
+        REST API
+        PostgreSQL database
+        Secure environment variables
+        Frontend–backend communication
+
+pip freeze > requirements.txt
+    Save package version in a file
+        AWS Elastic Beanstalk installs dependencies from this file
+        Anyone can remake the same environment
+        Ensures same versions everywhere
+
+django-admin startproject config .
+    django-admin
+        Django’s command-line tool
+        Used to create projects, apps, migrations, etc.
+    startproject
+        Tells Django    :   “Create a new project (global configuration)”
+    config
+        This is the project name, NOT an app
+        Contains settings, urls, server config
+    . (dot at the end)
+        Create files in the current folder
+
+Split Setting.py into
+    base.py
+    dev.py
+    prod.py
+
+Create apps
+    user
+    onboarding
+    study_plan
+    study_session
+    feedback
+    progress
+
+Create and Setup .env file for keeping Secrets (access keys, password)
+
+Download, Install and Setup PostgreSQL (version = 15.15)
+
+Connect PostgreSQL to Django
+
+
+
