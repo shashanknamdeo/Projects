@@ -153,21 +153,6 @@ SNK is a **mobile file synchronization and backup system** that manages file sto
 
 ---
 
-## Technologies Used Across Projects
-
-- **Languages:** Python, TypeScript, JavaScript  
-- **Backend:** Django, Django REST Framework  
-- **Frontend:** React.js, React Native  
-- **Databases:** PostgreSQL  
-- **Cloud:** AWS (EC2, S3, RDS, Amplify, Elastic Beanstalk)  
-- **AI/ML:** LLM APIs, Scikit-learn, TensorFlow  
-- **DevOps:** Docker, Git, GitHub  
-- **Task Processing:** Celery, Redis  
-- **Automation:** Selenium, BeautifulSoup  
-- **Data Processing:** Pandas, NumPy  
-
----
-
 ## 5. Gossipy
 📁 **Project Folder:** [View Project](./Gossipy)
 
@@ -186,6 +171,21 @@ The system converts voice to text, generates AI responses, and converts them bac
 - **State Management:** React Hooks  
 - **Mobile Framework:** Expo / React Native  
 - **Cloud Platform:** AWS  
+
+---
+
+## Technologies Used Across Projects
+
+- **Languages:** Python, TypeScript, JavaScript  
+- **Backend:** Django, Django REST Framework  
+- **Frontend:** React.js, React Native  
+- **Databases:** PostgreSQL  
+- **Cloud:** AWS (EC2, S3, RDS, Amplify, Elastic Beanstalk)  
+- **AI/ML:** LLM APIs, Scikit-learn, TensorFlow  
+- **DevOps:** Docker, Git, GitHub  
+- **Task Processing:** Celery, Redis  
+- **Automation:** Selenium, BeautifulSoup  
+- **Data Processing:** Pandas, NumPy  
 
 ---
 
