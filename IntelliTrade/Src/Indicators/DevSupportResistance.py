@@ -5,11 +5,20 @@ from datetime import datetime
 import findiff
 
 
-historical_data = fetchHistoricalData(instrument_token=1510401, from_date='2020-11-25', to_date='2020-11-25', interval='minute') 
-df = pd.DataFrame(historical_data)
-df.to_pickle('AXISBANK_20201125.pickle')
-df = pd.read_pickle('AXISBANK_20201125.pickle')
-df = pd.read_pickle('AXISBANK_20201125_2min.pickle')
+import os
+
+if __name__ == '__main__':
+    # historical_data = fetchHistoricalData(instrument_token=1510401, from_date='2020-11-25', to_date='2020-11-25', interval='minute') 
+    # df = pd.DataFrame(historical_data)
+    # df.to_pickle('AXISBANK_20201125.pickle')
+    # df = pd.read_pickle('AXISBANK_20201125.pickle')
+    
+    pickle_path = os.getenv('PICKLE_DATA_PATH', 'AXISBANK_20201125_2min.pickle')
+    if os.path.exists(pickle_path):
+        df = pd.read_pickle(pickle_path)
+    else:
+        print(f"Pickle data file not found: {pickle_path}")
+        df = pd.DataFrame()
 
 
 # Exponential Moving Average
@@ -252,38 +261,29 @@ def findResistanceLevels(dataframe, price_colname, groupsize=10, offset=5, resis
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-data1 = pd.read_pickle('..\\Data\\AXISBANK_20201125_2min.pickle')
-findResistanceLevels(dataframe=data1, price_colname='high', groupsize=10, offset=5, verbose=1, debug=1) # 13
+    data1_path = os.getenv('DATA1_PICKLE', '..\\Data\\AXISBANK_20201125_2min.pickle')
+    if os.path.exists(data1_path):
+        data1 = pd.read_pickle(data1_path)
+        findResistanceLevels(dataframe=data1, price_colname='high', groupsize=10, offset=5, verbose=1, debug=1) # 13
 
-data2 = pd.read_pickle('..\\Data\\AXISBANK_20201124_2min.pickle')
-findResistanceLevels(dataframe=data2, price_colname='high', groupsize=10, offset=5, verbose=1, debug=1)
-(622.55, 171, '14:57', 13)
-        (620.0, 169, '14:53', 11) -> False signal
-(617.5, 80, '11:55', 9)
-    (616.45, 95, '12:25', 6)
-    (614.7, 113, '13:01', 2)
-(612.95, 60, '11:15', 2)
-        (611.85, 74, '11:43', 1) -> False signa
-        (609.9, 42, '10:39', 0) -> False, and why 10:49 is missing?
-        (608.0, 23, '10:01', -1)
-        (606.95, 11, '09:37', -1) -> False signal
+    data2_path = os.getenv('DATA2_PICKLE', '..\\Data\\AXISBANK_20201124_2min.pickle')
+    if os.path.exists(data2_path):
+        data2 = pd.read_pickle(data2_path)
+        findResistanceLevels(dataframe=data2, price_colname='high', groupsize=10, offset=5, verbose=1, debug=1)
 
+    data3_path = os.getenv('DATA3_CSV', 'AXISBANK_2MINUTE_2020-11-23.csv')
+    if os.path.exists(data3_path):
+        data3 = pd.read_csv(data3_path) 
+        findResistanceLevels(dataframe=data3, price_colname='high', groupsize=10, offset=5, verbose=1, debug=0)
 
-data3 = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\AXISBANK\DAILY\2MINUTE\2020\AXISBANK_2MINUTE_2020-11-23.csv') 
-findResistanceLevels(dataframe=data3, price_colname='high', groupsize=10, offset=5, verbose=1, debug=0)
-[(612.1, 0, '09:15', 22), (608.2, 145, '14:05', 21), (605.85, 100, '12:35', 18), (602.95, 160, '14:35', 12), (600.65, 64, '11:23', 4), (597.6, 175, '15:05', 0)]
-
-(600.65, 64, '11:23', 4) -> False
-and left 600 signal post 330
-
-
-
-data = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\AXISBANK\DAILY\2MINUTE\2020\AXISBANK_2MINUTE_2020-11-25.csv') 
-dayDataFrame = data
-from Charts.CandleStickChart import plotCandleStickDayData
-resistanceLevelList = findResistanceLevels(dataframe=dayDataFrame, price_colname='high', groupsize=10, offset=5, resistance_validation_levels=3, value_thresholds=(1,2, 5), verbose=1, debug=0)
-resistanceLevelList = [item[0] for item in resistanceLevelList]
-plotCandleStickDayData(dayDataFrame=dayDataFrame, resistanceLevelList=resistanceLevelList)
+    data_axis_path = os.getenv('DATA_AXIS_CSV', 'AXISBANK_2MINUTE_2020-11-25.csv')
+    if os.path.exists(data_axis_path):
+        data = pd.read_csv(data_axis_path) 
+        dayDataFrame = data
+        from Charts.CandleStickChart import plotCandleStickDayData
+        resistanceLevelList = findResistanceLevels(dataframe=dayDataFrame, price_colname='high', groupsize=10, offset=5, resistance_validation_levels=3, value_thresholds=(1,2, 5), verbose=1, debug=0)
+        resistanceLevelList = [item[0] for item in resistanceLevelList]
+        plotCandleStickDayData(dayDataFrame=dayDataFrame, resistanceLevelList=resistanceLevelList)
 
 
 

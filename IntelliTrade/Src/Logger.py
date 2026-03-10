@@ -7,6 +7,19 @@ https://docs.python.org/3/howto/logging.html#configuring-logging
 import os
 from datetime import datetime
 import logging
+from pathlib import Path
+import sys
+
+# Add project root to sys.path if needed for imports
+BASE_DIR = Path(__file__).resolve().parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from config.paths import GOOGLEDRIVE_TRADE_LOGS_DIR
+except ImportError:
+    # Fallback to local logs folder if config is not available
+    GOOGLEDRIVE_TRADE_LOGS_DIR = Path('logs')
 
 # today_datetime = datetime.now().strftime('%Y%m%d_%H%M%S')
 # logger = logging.getLogger('Intellitrade')

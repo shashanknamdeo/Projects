@@ -1,34 +1,19 @@
-# Libraries
+import sys
+import os
+from pathlib import Path
 
-import requests
-import json
-import math
+# Add project root to sys.path if needed for imports
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
 
-# -----------------------------------------------
-
-# from LibSaveDataFrameToDisk import saveDataFrameToDisk
-# from LibLoadDataFrameFromDisk import loadCSVFileFromDirectoryIntoDataFrame
-# from LibFileNames import fetchAllFilesinDirectory
-# from LibMatplotlibPlots import matplotlibPlot
-# from LibMatplotlibPlots import matplotlibDualAxisPlot
-
-# -------------------------------------------------------------------------------------------------
-
-global NIFTY_STEP_SIZE
-global NIFTY_STEP_COUNT
-global BANKNIFTY_STEP_SIZE
-global BANKNIFTY_STEP_COUNT
-global NIFTY_LTP
-global BANKNIFTY_LTP
-
-NIFTY_STEP_SIZE  = 50
-NIFTY_STEP_COUNT = 20
-BANKNIFTY_STEP_SIZE  = 100
-BANKNIFTY_STEP_COUNT = 20
+try:
+    from config.paths import DROPBOX_TRADING_DATA_DIR as DROPBOX_TRADING_OPTION_CHAIN_DATA_DIR
+except ImportError:
+    # Fallback to local data folder if config is not available
+    DROPBOX_TRADING_OPTION_CHAIN_DATA_DIR = Path('data/option_data')
 
 # -----------------------------------------------
-
-DROPBOX_TRADING_OPTION_CHAIN_DATA_DIR = r'D:\OptionChainData'
 
 # -------------------------------------------------------------------------------------------------
 

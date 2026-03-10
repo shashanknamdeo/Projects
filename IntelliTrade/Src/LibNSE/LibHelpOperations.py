@@ -3,7 +3,20 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta, TH
 
 import sys
-PYTHON_LIB_FILEIO_DIR = r'D:\Notebook\Material\Python\PythonLibrary\FileIO'
+import os
+from pathlib import Path
+
+# Add project root to sys.path if needed for imports
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from config.paths import PYTHON_LIB_FILEIO_DIR
+except ImportError:
+    # Fallback to local lib folder if config is not available
+    PYTHON_LIB_FILEIO_DIR = 'lib_fileio'
+
 sys.path.append(PYTHON_LIB_FILEIO_DIR)
 
 from LibFetchFileNameFromDisk import toFetchAllFilesinDirectory

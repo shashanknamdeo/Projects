@@ -16,10 +16,19 @@ tick_data_dir = os.path.join(KITECONNECT_INSTRUMENT_TICKDATA_DIR, today_date, in
 
 stock-date '09-Dec AXISBANK'
 
-# tick_data = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\AXISBANK\DAILY\MINUTE\2020\AXISBANK_MINUTE_2020-12-09.csv', header=None, names=tickDataColumnList_FULL)
-trendline_data = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\AXISBANK\DAILY\MINUTE\2020\AXISBANK_MINUTE_2020-12-09.csv')
-
-trendline_data = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\ADANIENT\DAILY\MINUTE\2020\ADANIENT_MINUTE_2020-12-24.csv')
+if __name__ == '__main__':
+    # tick_data = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\AXISBANK\DAILY\MINUTE\2020\AXISBANK_MINUTE_2020-12-09.csv', header=None, names=tickDataColumnList_FULL)
+    # Example data paths
+    axis_data_path = os.getenv('AXIS_DATA_PATH', 'AXISBANK_MINUTE_2020-12-09.csv')
+    adani_data_path = os.getenv('ADANI_DATA_PATH', 'ADANIENT_MINUTE_2020-12-24.csv')
+    
+    if os.path.exists(axis_data_path):
+        trendline_data = pd.read_csv(axis_data_path)
+    elif os.path.exists(adani_data_path):
+        trendline_data = pd.read_csv(adani_data_path)
+    else:
+        print("Example data files not found. Please set AXIS_DATA_PATH or ADANI_DATA_PATH.")
+        trendline_data = pd.DataFrame() # Empty fallback
 
 
 # AP1. Let try to find the best fit line

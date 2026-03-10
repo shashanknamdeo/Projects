@@ -169,25 +169,20 @@ def classifyCandle(candleOpen, candleHigh, candleLow, candleClose, candleDate=No
 
 
 
-# data = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\AXISBANK\DAILY\MINUTE\2020\AXISBANK_MINUTE_2020-11-25.csv')
-# data['time'] = data.date.apply(lambda x: ':'.join(x.split()[1].split(':')[:2])) 
-# data['classifyCandle'] = data.apply(lambda x: classifyCandle(x.open, x.high, x.low, x.close), axis=1)
-# data.classifyCandle.value_counts().sort_index(ascending=False)
-# data[34:47] 
+# ----------------------------------------------------------------------------------------------------------------------
 
+if __name__ == '__main__':
+    import pandas as pd
+    import os
+    # Example data path
+    data_path = os.getenv('EXAMPLE_DATA_PATH', 'AXISBANK_MINUTE_2020-11-25.csv')
+    
+    if os.path.exists(data_path):
+        data = pd.read_csv(data_path)
+        data['time'] = data.date.apply(lambda x: ':'.join(x.split()[1].split(':')[:2])) 
+        data['classifyCandle'] = data.apply(lambda x: classifyCandle(x.open, x.high, x.low, x.close), axis=1)
+        print(data.classifyCandle.value_counts().sort_index(ascending=False))
+    else:
+        print(f"Example data file not found: {data_path}")
 
-# row = data[data.time =='12:50']
-# candleOpen, candleHigh, candleLow, candleClose = row.open.values[0], row.high.values[0], row.low.values[0], row.close.values[0]
-# classifyCandle(candleOpen, candleHigh, candleLow, candleClose, verbose=1)
-
-# data['time'] = data.date.apply(lambda x: ':'.join(x.split()[1].split(':')[:2])) 
-
-
-# data = dataframe[(dataframe.date == '2020-11-26')]
-# for index in range(0, data.shape[0]):
-#     row = data.iloc[index]
-#     candleOpen, candleHigh, candleLow, candleClose = (row.open, row.high, row.low, row.close)
-#     print(row.time, candleOpen, candleHigh, candleLow, candleClose)
-#     classifyCandle(candleOpen, candleHigh, candleLow, candleClose, verbose=1)
-#     print('\n')
-#     input()
+# ----------------------------------------------------------------------------------------------------------------------

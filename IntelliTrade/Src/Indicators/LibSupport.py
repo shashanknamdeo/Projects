@@ -128,13 +128,22 @@ def findSupportLevels(dataframe, price_colname, groupsize=10, offset=5, support_
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-data = pd.read_csv(r'E:\NotebookShare\Material\Python\Projects\KiteConnect\Data\HistoricalData\AXISBANK\DAILY\2MINUTE\2020\AXISBANK_2MINUTE_2020-11-25.csv') 
-dayDataFrame = data
-from Charts.CandleStickChart import plotCandleStickDayData
-supportLevelList = findSupportLevels(dataframe=dayDataFrame, price_colname='low', groupsize=10, offset=5, support_validation_levels=3, value_thresholds=(1,2, 5), verbose=1, debug=0)
-supportLevelList = [item[0] for item in supportLevelList]
-plotCandleStickDayData(dayDataFrame=dayDataFrame, supportLevelList=supportLevelList, sLinecolor='Red')
+# ----------------------------------------------------------------------------------------------------------------------
 
+if __name__ == '__main__':
+    import pandas as pd
+    import os
+    # Example data path
+    data_path = os.getenv('EXAMPLE_DATA_PATH', 'AXISBANK_2MINUTE_2020-11-25.csv')
+    
+    if os.path.exists(data_path):
+        dayDataFrame = pd.read_csv(data_path) 
+        from Charts.CandleStickChart import plotCandleStickDayData
+        supportLevelList = findSupportLevels(dataframe=dayDataFrame, price_colname='low', groupsize=10, offset=5, support_validation_levels=3, value_thresholds=(1,2, 5), verbose=1, debug=0)
+        supportLevelList = [item[0] for item in supportLevelList]
+        plotCandleStickDayData(dayDataFrame=dayDataFrame, supportLevelList=supportLevelList, sLinecolor='Red')
+    else:
+        print(f"Example data file not found: {data_path}")
 
-plotCandleStickDayData(dayDataFrame=dayDataFrame, resistanceLevelList=resistanceLevelList, rLinecolor='Green', supportLevelList=supportLevelList, sLinecolor='Red') 
+# ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------

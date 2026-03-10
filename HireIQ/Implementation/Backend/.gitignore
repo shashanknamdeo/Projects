@@ -1,0 +1,32 @@
+# ========================================================
+# HireIQ Specific Ignores (Common ignores handled in root)
+# ========================================================
+
+# =========================
+# Django Migrations
+# (keep __init__.py)
+# =========================
+migrations/
+!migrations/__init__.py
+
+# =========================
+# Logs
+# =========================
+logs/
+
+# =========================
+# AWS / Elastic Beanstalk
+# =========================
+.elasticbeanstalk/
+.ebextensions/*.config.local
+
+# =========================
+# Celery / Async (future-proof)
+# =========================
+celerybeat-schedule
+celerybeat.pid
+
+# =========================
+# AWS Lambda artifacts
+# =========================
+requests-layer.zip

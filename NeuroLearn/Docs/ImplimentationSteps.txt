@@ -1,7 +1,7 @@
 
 Install python 3.11.9
 
-Make virtal envronment at D:\Material\AppDevelopment\NeuroLearn\Implementation\Backend\PythonVirtualEnvironment
+Make virtual environment in the Backend directory.
 
 Django version = 5.2.10
 
@@ -149,7 +149,7 @@ Go to:http://127.0.0.1:8000/api/auth/register/
 Fill the Form
     username: shashank
     email: test@test.com
-    password: 12345678
+    password: [PROTECTED]
 
 Click POST
 
@@ -169,7 +169,7 @@ Go to:http://127.0.0.1:8000/api/token/
 
 Fill the Form
     username: shashank
-    password: 12345678
+    password: [PROTECTED]
 
 Click POST
 
@@ -238,7 +238,7 @@ login_url = "http://127.0.0.1:8000/api/token/"
 
 login_data = {
     "username": "shashank",
-    "password": "12345678"
+    "password": "[PROTECTED]"
 }
 
 login_response = requests.post(login_url, json=login_data)
@@ -320,7 +320,7 @@ TestAuthView - APIView.dispatch()
             } (JUST FOR UNDERSTANDING)
     TestAuthView.get()
         Response returned
-    DRF Organise response into HTTP Response (Status Code, Respnse JSON etc)
+    DRF Organise response into HTTP Response (Status Code, Respnse JSON etc) 
 
 
 ---------------------------------------------------------------------------------------------------

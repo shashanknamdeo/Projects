@@ -134,7 +134,7 @@ NeuroLearn is an **AI-powered learning assistant** that helps students study eff
 ---
 
 ## 4. SNK
-📁 **Project Folder:** [View Project](./SNK)
+📁 **Project Folder:** [View Project](./Snk)
 
 SNK is a **mobile file synchronization and backup system** that manages file storage and cloud backups while ensuring data integrity and efficient syncing.
 
