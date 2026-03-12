@@ -126,17 +126,18 @@ def main(prompt):
 
 
 prompt = """
-tweak my resume to create a new resume json based on JD 
+Task : Tweak my resume to create a new resume json based on JD 
 ---
 Output:
     Only output Json
     No other text than JSON
     Response in such a format so that i can copy the response in just one click
+    Total character Per Project explanation points <= 500-520
 Output Format :
 {"profile_summary": "","skills": {"Skill_Types (First alphabet capital)" : ["Skill_1", "Skill_2"]},"experience": {"role": "Software Engineer – Project Experience","type": "Independent & Academic Projects","location": "Bhopal, India","duration": "2022 – Present","projects": [{"name": "HireIQ – AI-Driven Job Application Automation Platform","technologies": [],"highlights": []},{"name": "IntelliTrade – Automated Trading & Analytics System","technologies": [],"highlights": []},{"name": "NeuroLearn – AI-Based Personalized Learning Platform","technologies": [],"highlights": []},]}}
 
 ---
-this is my resume JSON
+This is my resume JSON
 
 {
   "profile_summary": "Entry-level Software Engineer and AI/ML undergraduate with hands-on experience in Python, Django, AWS, and Prompt Engineering for AI-driven applications. Skilled in building scalable backend systems, REST APIs, automation pipelines, and cloud-native solutions for EdTech, FinTech, and AI/ML projects. Experienced with PostgreSQL, REST API design, authentication workflows, and deploying production systems on AWS.",
@@ -198,8 +199,8 @@ this is my resume JSON
     {"name": "Wipro TalentNext – .NET Full Stack Developer Certification", "date": "October 2025", "issuer": "Wipro Limited"}
   ]
 }
+
 ---
----------------------------------------------------------------------------------------------------
 
 and this is the JD 
 
