@@ -150,7 +150,7 @@ OUTPUT SCHEMA
       "string",
       "string"
     ],
-    "correct_answer_index": number
+    "correct_answer_index": 0
   },
 
   "explanation_md": "markdown string"
