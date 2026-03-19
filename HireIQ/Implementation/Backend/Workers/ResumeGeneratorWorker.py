@@ -129,10 +129,23 @@ prompt = """
 Task : Tweak my resume to create a new resume json based on JD 
 ---
 Output:
-    Only output Json
-    No other text than JSON
-    Response in such a format so that i can copy the response in just one click
-    Total character Per Project explanation points <= 500-520
+
+STRICT OUTPUT RULES:
+- Output ONLY valid JSON
+- DO NOT include explanations, text, logs, or markdown
+- DO NOT repeat the JSON
+- DO NOT include prefixes like "Here is your JSON"
+- DO NOT include Python types like <class 'str'>
+- Ensure JSON is parsable using json.loads()
+- Remove trailing commas
+- Ensure all quotes are double quotes
+- Ensure proper escaping if needed
+- Keep output in a SINGLE JSON object only
+
+Constraints:
+- Total characters per project highlights <= 520
+- Skills section total <= 550 chars
+
 Output Format :
 {"profile_summary": "","skills": {"Skill_Types (First alphabet capital)" : ["Skill_1", "Skill_2"]},"experience": {"role": "Software Engineer – Project Experience","type": "Independent & Academic Projects","location": "Bhopal, India","duration": "2022 – Present","projects": [{"name": "HireIQ – AI-Driven Job Application Automation Platform","technologies": [],"highlights": []},{"name": "IntelliTrade – Automated Trading & Analytics System","technologies": [],"highlights": []},{"name": "NeuroLearn – AI-Based Personalized Learning Platform","technologies": [],"highlights": []},]}}
 

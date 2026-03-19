@@ -1,9 +1,17 @@
 
+Persona : You are an AI study planner.
+
+---
+
+Task : Create a study plan
+
+---
+
+Context :
 {
   "name": "Shashank",
   "topic": "Data Structures",
   "current_level": "Beginner",
-  "learning_pace": "Slow & detailed",
   "study_schedule": {
     "total_study_days": 5,
     "study_minutes_per_day": 60
@@ -13,8 +21,9 @@
   "goal": "job"
 }
 
+---
 
-You are an AI study planner.
+OUTPUT :
 
 CRITICAL INSTRUCTIONS:
 - Return ONLY valid JSON
@@ -23,7 +32,7 @@ CRITICAL INSTRUCTIONS:
 - Do NOT include markdown
 - Do NOT include extra text
 
-JSON SCHEMA (STRICT):
+OUTOUT SCHEMA - JSON (STRICT):
 
 {
   "plan_version": "v1",
@@ -41,6 +50,8 @@ JSON SCHEMA (STRICT):
   ]
 }
 
-RULES:
+---
+
+Instruction :
 - Days must cover exactly total_days
 - Topics must be ordered from basic to advanced

@@ -1,20 +1,22 @@
-
-Name
-Email
-Phone no.
-
--------------------------------------------------
-
-Topic
-Current level
-Learning pace
-Study days & time
+At Registration
+    Name        
+    Email       
+    Phone no.   
 
 -------------------------------------------------
 
-Age group
-Background stream
-Goal
+At Onbarding (First login)
+    Age group
+    Background stream
+
+-------------------------------------------------
+
+At Study plan generation
+    Topic
+    Current level
+    Study days & time
+    Goal
+
 
 ___________________________________________________________________________________________________
 
@@ -29,16 +31,7 @@ Current level
 -------------------------------------------------
 
 
-Learning pace
--------------
-    Slow & detailed (Explain patiently, step by step)
-    Normal pace (Balanced explanation)
-    Fast & concise (Straight to the point)
-
--------------------------------------------------
-
-
-Age group
+Age group (take info or now, use in future)
 ---------
     Below 18
     18–22
@@ -48,13 +41,13 @@ Age group
 Help in decide
     Explanation tone (examples, analogies)
     Pace & patience 
-    UI/UX (less childish / more professional) (Optional)
+    UI/UX (less childish / more professional)
 
 
 -------------------------------------------------
 
 
-Stream
+Stream 
 ------
     Science / Engineering
     Arts / Humanities

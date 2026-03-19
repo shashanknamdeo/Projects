@@ -1,0 +1,4 @@
+how will we convert email or massage text into email and whatsapp massage 
+    Problem -  Extraction of Bold text, bullet point, etc
+    if we use JSON - Bold text, bullet point, etc
+    if we use markdown - it contain #, *, -, etc

@@ -57,7 +57,7 @@
 
 {
   "plan_version": "v1",
-  "subject": "string",
+  "subject": "string", // subject = study plan topic
   "total_days": "number",
   "daily_time_minutes": "number",
   "schedule": [
@@ -65,12 +65,11 @@
       "start_day": "number",
       "end_day": "number",
       "topic_id": "string",
-      "topic_name": "string",
+      "topic_name": "string", // "Topic" is the subtopic of subject (subject = study plan topic)
       "difficulty": "number (1-5)"
     }
   ]
 }
-
 
 // ----------------------------------------------
 
