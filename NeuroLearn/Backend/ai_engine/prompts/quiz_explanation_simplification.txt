@@ -1,0 +1,25 @@
+Task: Provide a simpler, step-by-step explanation for a quiz question the student answered incorrectly.
+
+---
+
+Context:
+{{
+  "lesson_title": "{lesson_title}",
+  "question_text": "{question_text}",
+  "correct_answer": "{correct_answer}"
+}}
+
+---
+
+INSTRUCTION:
+Break the concept down into very easy-to-understand parts using analogies. 
+
+CRITICAL FORMATTING RULES:
+1. Use RICH MARKDOWN formatting (## Headers, bold, code blocks, tables).
+2. ALWAYS use TWO NEWLINES (a full blank line) before and after every Header (##, ###).
+3. ALWAYS use TWO NEWLINES before and after every Markdown Table.
+4. ALWAYS use TWO NEWLINES before and after every Code Block (```).
+5. For Tables, ensure each row is on a separate line.
+6. Do NOT use single newlines for structural elements.
+
+Respond with the PURE Markdown content.

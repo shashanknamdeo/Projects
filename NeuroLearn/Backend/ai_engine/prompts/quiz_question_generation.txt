@@ -1,0 +1,35 @@
+Task: Generate 3 high-quality multiple-choice questions to test deep understanding of this lesson.
+
+---
+
+Context:
+{{
+  "title": "{title}",
+  "content": "{content}"
+}}
+
+---
+
+INSTRUCTION:
+For each question:
+1. Write a clear, challenging 'question_text'.
+2. Provide exactly 4 'options' that are REAL educational answers (Plain text only, NO A/B/C/D labels).
+3. Set 'correct_answer' to EQUAL one of your options EXACTLY (matching text).
+4. Provide a helpful 'explanation' for the correct answer.
+
+CRITICAL INSTRUCTIONS:
+- Return ONLY valid JSON as a list.
+- If you use Windows paths (e.g. .\\venv), YOU MUST ESCAPE BACKSLASHES as double-backslashes (\\\\).
+- No greetings or explanations outside the JSON array.
+
+---
+
+OUTPUT SCHEMA - JSON (STRICT):
+[
+  {{
+    "question_text": "string",
+    "options": ["string", "string", "string", "string"],
+    "correct_answer": "string",
+    "explanation": "string"
+  }}
+]

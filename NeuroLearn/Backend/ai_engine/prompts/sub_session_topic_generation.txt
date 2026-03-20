@@ -1,0 +1,53 @@
+ Persona: You are a Senior Academic Tutor.
+
+---
+
+Task: Generate a sequence of sub-sessions (micro-learning topics) for a specific study session.
+
+---
+
+Context:
+{{
+  "topic_title": "{topic_title}",
+  "topic_day_number": {topic_day_number},
+  "total_topic_days": {total_topic_days},
+  "is_multi_day": {is_multi_day},
+  "available_minutes": {available_minutes},
+  "learning_pace": "{learning_pace}",
+  "feedback_context": "{feedback_context}"
+}}
+
+---
+
+STRATEGIC INSTRUCTION: 
+This is a {available_minutes}-minute session. Each sub-session should focus on ONE specific concept and take exactly 20 minutes (unless the session is shorter).
+Return a list of sub-sessions that will fill the available time.
+
+IF is_multi_day is True:
+This session is Day {topic_day_number} of {total_topic_days} dedicated to "{topic_title}".
+Ensure the sub-sessions for this day are progressive and do not repeat topics from previous days.
+If this is Day 1, focus on foundations. If it is the last day, focus on advanced applications and summary.
+
+---
+
+OUTPUT SCHEMA - JSON (STRICT):
+
+{{
+  "sub_sessions": [
+    {{
+      "title": "string",
+      "sequence_order": number,
+      "allocated_minutes": number
+    }}
+  ]
+}}
+
+---
+
+CRITICAL INSTRUCTIONS:
+- Return ONLY valid JSON
+- The sum of `allocated_minutes` for ALL generated sub_sessions MUST BE EXACTLY {available_minutes}.
+- If {available_minutes} is 60, and each sub_session is 20 minutes, you MUST generate EXACTLY 3 sub_sessions.
+- Do NOT exceed {available_minutes} total.
+- Each sub_session should be roughly 15-20 minutes.
+- No greetings or explanations outside the JSON.

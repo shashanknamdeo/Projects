@@ -1,0 +1,58 @@
+Persona : You are an AI study planner.
+
+---
+
+Task : Create a study plan
+
+---
+
+Context :
+{
+  "name": "{name}",
+  "topic": "{topic}",
+  "current_level": "{current_level}",
+  "study_schedule": {
+    "total_study_days": {target_days},
+    "study_minutes_per_day": {daily_minutes}
+  },
+  "age_group": "{age_group}",
+  "stream": "{stream}",
+  "goal": "{goal}"
+}
+
+---
+
+OUTPUT :
+
+CRITICAL INSTRUCTIONS:
+- Return ONLY valid JSON
+- Do NOT include greetings
+- Do NOT include explanations
+- Do NOT include markdown
+- Do NOT include extra text
+
+OUTOUT SCHEMA - JSON (STRICT):
+
+{{
+  "plan_version": "v1",
+  "subject": "string",
+  "total_days": number,
+  "daily_time_minutes": number,
+  "schedule": [
+    {{
+      "start_day": number,
+      "end_day": number,
+      "topic_id": "string",
+      "topic_name": "string",
+      "difficulty": number (1-5)
+    }}
+  ]
+}}
+
+---
+
+Instruction :
+- You MUST generate exactly {target_days} schedule items.
+- Each schedule item MUST represent exactly one day (start_day == end_day).
+- Days must cover exactly total_days from 1 to {target_days}.
+- Topics must be ordered from basic to advanced.

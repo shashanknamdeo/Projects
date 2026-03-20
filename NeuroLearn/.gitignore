@@ -1,0 +1,40 @@
+# Root .gitignore for NeuroLearn
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Version Control
+.git/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+out/
+
+# Dependency directories
+node_modules/
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Database
+*.sqlite3
+
+# Logs
+backend/logs/
+*.log
+
+# Misc
+Logo/
+docs/backup/
