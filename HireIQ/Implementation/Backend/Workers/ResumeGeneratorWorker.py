@@ -1,11 +1,13 @@
 import os
 import sys
 import json
+import time
 import pdfkit
 import pyperclip
 
 from jinja2 import Environment, FileSystemLoader
 
+from pypdf import PdfReader, PdfWriter
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
@@ -13,6 +15,10 @@ sys.path.append(BASE_DIR)
 print("BASE_DIR =", BASE_DIR)
 
 # from GenAI import gen_ai_client
+
+# -------------------------------------------------------------------------------------------------
+
+RESUME_PATH = "C:/Users/shash/Downloads/Resume.pdf"
 
 # -------------------------------------------------------------------------------------------------
 
@@ -84,7 +90,7 @@ def generateResumePDF(resume_json):
     # Generate PDF
     pdfkit.from_file(
         "resume_rendered.html",
-        "C:/Users/shash/Downloads/Resume.pdf",
+        RESUME_PATH,
         options=options
     )
 
@@ -92,14 +98,28 @@ def generateResumePDF(resume_json):
 
 
 
+def trim_highlights_to_fit(resume_json):
+    """
+    """
+    projects = resume_json.get("experience", {}).get("projects", [])
+    # 
+    for i in range(0, len(projects)):
+        highlights = projects[2-i].get("highlights", [])
+        # 
+        # Only trim if more than 3 highlights
+        if len(highlights) > 3:
+            print(f'triming Project : {projects[2-i]["name"]}')
+            projects[2-i]["highlights"] = highlights[:3]
+            # 
+            generateResumePDF(resume_json)
+            time.sleep(2)
+            reader = PdfReader(RESUME_PATH)
+            if len(reader.pages) == 1:
+                return True
+    # 
+    print("Exception : All Project highlights Striped to 3, Still Resume pages > 1")
+    return False
 
-
-# def main():
-#     """
-#     """
-#     response = generateResumeJSON(prompt)
-#     resume_json = extract_message(response)
-#     generateResumePDF(resume_json)
 
 def main(prompt):
     """
@@ -117,6 +137,20 @@ def main(prompt):
         resume_json = json.loads(resume_json)
         print(type(resume_json))
         generateResumePDF(resume_json)
+        # 
+        try:
+            reader = PdfReader(RESUME_PATH)
+            if len(reader.pages) > 1:
+                print(f"[ResumeGeneratorWorker] Truncating {len(reader.pages)} pages to 1 page.")
+                response = trim_highlights_to_fit(resume_json=resume_json)
+                if response == True:
+                    print(f"[ResumeGeneratorWorker] Truncated Resume to 1 page.")
+            # 
+            else:
+                print(f"[ResumeGeneratorWorker] Resume has 1 page.")
+        # 
+        except Exception as e:
+            print(f"[ResumeGeneratorWorker] Failed to truncate PDF: {e}")
 
 
 
@@ -142,76 +176,69 @@ STRICT OUTPUT RULES:
 - Ensure proper escaping if needed
 - Keep output in a SINGLE JSON object only
 
-Constraints:
-- Total characters per project highlights <= 520
-- Skills section total <= 550 chars
+
+STRICT CONSTRAINTS:
+- Profile Summary length: 350–450 characters
+- Skills section total length: 650-750 characters
+- Skills must contain EXACTLY 5 categories
+- Each skills category must contain at least 5-7 skills
+- EXPERIENCE Section: Total 2300-2500 characters
+- Project highlights: 3-4 highlights per project
+- Use ONLY these project:
+  - HireIQ – AI-Driven Job Application Automation Platform
+  - IntelliTrade – Automated Trading & Analytics System
+  - NeuroLearn – AI-Based Personalized Learning Platform
+
 
 Output Format :
 {"profile_summary": "","skills": {"Skill_Types (First alphabet capital)" : ["Skill_1", "Skill_2"]},"experience": {"role": "Software Engineer – Project Experience","type": "Independent & Academic Projects","location": "Bhopal, India","duration": "2022 – Present","projects": [{"name": "HireIQ – AI-Driven Job Application Automation Platform","technologies": [],"highlights": []},{"name": "IntelliTrade – Automated Trading & Analytics System","technologies": [],"highlights": []},{"name": "NeuroLearn – AI-Based Personalized Learning Platform","technologies": [],"highlights": []},]}}
 
 ---
-This is my resume JSON
+Profile Summary:
+Entry-level Software Engineer and AI/ML undergraduate with hands-on experience in Python, Django, AWS, and Prompt Engineering for AI-driven applications. Skilled in building scalable backend systems, REST APIs, automation pipelines, and cloud-native solutions across EdTech, FinTech, and AI/ML domains. Experienced in PostgreSQL, authentication workflows, API design, and deploying production-grade systems on AWS.
 
-{
-  "profile_summary": "Entry-level Software Engineer and AI/ML undergraduate with hands-on experience in Python, Django, AWS, and Prompt Engineering for AI-driven applications. Skilled in building scalable backend systems, REST APIs, automation pipelines, and cloud-native solutions for EdTech, FinTech, and AI/ML projects. Experienced with PostgreSQL, REST API design, authentication workflows, and deploying production systems on AWS.",
-  "skills": {
-    "Development": ["Python", "Django", "RESTful APIs", "API Integration", "Backend Architecture", "Automation", "Selenium", "React Native"],
-    "Cloud_DevOps": ["AWS EC2", "AWS RDS", "AWS S3", "AWS IAM", "AWS Elastic Beanstalk", "AWS CloudWatch", "Docker", "Cloud Deployment", "Environment Configuration", "Scalable Systems"],
-    "Databases": ["PostgreSQL", "MongoDB", "SQL", "Data Modeling", "Query Optimization"],
-    "AI_ML_Analytics": ["AI/ML Concepts", "Generative AI (Gemini)", "Prompt Engineering", "AI-driven automation", "Data Analysis", "Algorithmic Logic"],
-    "Tools_Practices": ["Git", "GitHub", "Linux", "Logging", "Error Handling", "Unit Testing", "CI/CD Basics", "Fault Tolerance", "Agile Methodologies"]
-  },
-  "experience": {
-    "role": "Software Engineer – Project Experience",
-    "type": "Independent & Academic Projects",
-    "location": "Bhopal, India",
-    "duration": "2022 – Present",
-    "projects": [
-      {
-        "name": "HireIQ – AI-Driven Job Application Automation Platform",
-        "technologies": ["Python", "Django", "Selenium", "Generative AI (Gemini)", "Prompt Engineering", "PostgreSQL", "AWS RDS", "AWS Elastic Beanstalk"],
-        "highlights": [
-          "Built an end-to-end job automation pipeline for discovery, analysis, and application, reducing manual effort by 70–80%.",
-          "Implemented a Python–Django multi-worker architecture for scraping, resume matching, and apply-flow detection with Generative AI using Prompt Engineering techniques for JD scoring.",
-          "Designed secure RESTful APIs with authentication, authorization, logging, retries, and fault-tolerant, database-driven workflows.",
-          "Deployed on AWS with PostgreSQL-backed persistence, enabling scalable, restart-safe processing and operational stability."
-        ]
-      },
-      {
-        "name": "IntelliTrade – Automated Trading & Analytics System",
-        "technologies": ["Python", "Django", "AI/ML", "Data Analysis", "Kotak Securities API", "Zerodha API", "AWS"],
-        "highlights": [
-          "Developed an AI-powered algorithmic trading platform supporting multi-asset trading including equities and derivatives.",
-          "Integrated Kotak Securities API for automated trade execution and Zerodha API for real-time market data ingestion.",
-          "Built RESTful backend services in Django to process live data streams, strategy execution, trade logging, and performance monitoring.",
-          "Deployed on AWS to support scalable, low-latency operations and secure trade data storage."
-        ]
-      },
-      {
-        "name": "NeuroLearn – AI-Based Personalized Learning Platform",
-        "technologies": ["Generative AI (Gemini)", "Django", "React Native", "Prompt Engineering", "AWS", "PostgreSQL"],
-        "highlights": [
-          "Architected an AI-driven learning platform delivering personalized study plans using learner goals, pace, and performance data.",
-          "Applied AI/ML to dynamically adapt learning paths, improving learning efficiency, content relevance, and engagement.",
-          "Built a scalable Django and PostgreSQL backend deployed on AWS with validation, API security, and database optimization.",
-          "Designed RESTful APIs with authentication, authorization, logging, retries, and a React Native app for seamless access."
-        ]
-      }
-    ]
-  },
-  "education": [
-    {
-      "degree": "Bachelor of Technology – Artificial Intelligence & Machine Learning",
-      "institution": "Jai Narain College of Technology, Bhopal",
-      "duration": "2022 – 2026"
-    }
-  ],
-  "certifications": [
-    {"name": "AWS Certified Cloud Practitioner", "date": "August 2025", "issuer": "Amazon Web Services"},
-    {"name": "Prompt Engineering Knowledge Universe", "date": "Feb 2026", "issuer": "Tayana Academy"},
-    {"name": "Wipro TalentNext – .NET Full Stack Developer Certification", "date": "October 2025", "issuer": "Wipro Limited"}
-  ]
-}
+---
+
+Skills:
+- Python, Django, RESTful APIs, API Integration, Backend Architecture, Automation, Selenium, React Native, React, HTML, CSS, JavaScript, TypeScript
+- AWS EC2, AWS RDS, AWS S3, AWS IAM, AWS Elastic Beanstalk, AWS CloudWatch, Docker, Cloud Deployment, Environment Configuration, Scalable Systems
+- PostgreSQL, MongoDB, SQL, Data Modeling, Query Optimization
+- AI/ML Concepts, Generative AI (Gemini), Prompt Engineering, AI-driven automation, Data Analysis, Algorithmic Logic
+- Git, GitHub, Linux, Logging, Error Handling, Unit Testing, CI/CD Basics, Fault Tolerance, Agile Methodologies, Debugging
+
+---
+
+Experience:
+Role: Software Engineer – Project Experience  
+Type: Independent & Academic Projects  
+Location: Bhopal, India  
+Duration: 2022 – Present  
+
+Projects:
+
+1. HireIQ – AI-Driven Job Application Automation Platform  
+Technologies: Python, Django, Selenium, Generative AI (Gemini), Prompt Engineering, PostgreSQL, AWS RDS, AWS Elastic Beanstalk  
+Highlights:
+- Built an end-to-end job automation pipeline for job discovery, analysis, and application, reducing manual effort by 70–80%.
+- Implemented a Python–Django multi-worker architecture for scraping, resume matching, and apply-flow detection using Generative AI and prompt engineering for JD scoring.
+- Designed secure RESTful APIs with authentication, authorization, logging, retries, and fault-tolerant workflows.
+- Deployed on AWS with PostgreSQL-backed persistence, ensuring scalability and restart-safe operations.
+
+2. IntelliTrade – Automated Trading & Analytics System  
+Technologies: Python, Django, AI/ML, Data Analysis, Kotak Securities API, Zerodha API, AWS  
+Highlights:
+- Developed an AI-powered algorithmic trading platform supporting equities and derivatives trading.
+- Integrated Kotak Securities API for trade execution and Zerodha API for real-time market data ingestion.
+- Built Django-based RESTful services for live data processing, strategy execution, and performance tracking.
+- Deployed on AWS for scalable, low-latency processing and secure data management.
+
+3. NeuroLearn – AI-Based Personalized Learning Platform  
+Technologies: Generative AI (Gemini), Django, React, Prompt Engineering, AWS, PostgreSQL  
+Highlights:
+- Architected an AI-driven platform delivering personalized study plans based on learner goals and performance.
+- Applied AI/ML techniques to dynamically adapt learning paths and improve engagement.
+- Built a scalable Django backend with PostgreSQL, including validation, optimization, and secure APIs.
+- Developed RESTful APIs and a React-based frontend for seamless user experience.
 
 ---
 
