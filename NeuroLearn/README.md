@@ -4,11 +4,6 @@
 
 ---
 
-> [!CAUTION]
-> **Proprietary Software**: All rights reserved. This code is for showcase purposes only. See the [NOTICE](NOTICE) file for details.
-
----
-
 ## 🚀 Key Features
 
 - **AI Study Plan Generator**: Generates custom, day-by-day learning paths based on your specific goals.
@@ -112,12 +107,13 @@
    npm run dev
    ```
 
-## 📈 Roadmap
+---
 
-- [ ] Mobile Application (React Native)
-- [ ] Collaborative Study Groups
-- [ ] Integration with Learning Management Systems (LMS)
+> [!CAUTION]
+> **Proprietary Software**: All rights reserved. This code is for showcase purposes only. See the [NOTICE](NOTICE) file for details.
 
 ---
 
 Developed by [Shashank Namdeo](https://github.com/shashanknamdeo)
+
+
