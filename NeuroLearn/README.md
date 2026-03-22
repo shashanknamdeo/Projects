@@ -39,8 +39,8 @@
 </p>
 
 <p align="center">
-  <a href="./screenshots/StudyplanCreation-1.png">
-    <img src="./screenshots/StudyplanCreation-1.png" width="45%" />
+  <a href="./screenshots/StudyPlanCreation-1.png">
+    <img src="./screenshots/StudyPlanCreation-1.png" width="45%" />
   </a>
   <a href="./screenshots/AIGeneration.png">
     <img src="./screenshots/AIGeneration.png" width="45%" />
