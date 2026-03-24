@@ -131,10 +131,11 @@ def main(prompt):
         print(temp_prompt)
         pyperclip.copy(temp_prompt)
         # 
-        resume_json = read_multiline_input()
-        print(type(resume_json))
-        print(resume_json)
-        resume_json = json.loads(resume_json)
+        response = read_multiline_input()
+        print(response)
+        print("Resume Type : ", type(response))
+        print("Response Length : ", len(response))
+        resume_json = json.loads(response)
         print(type(resume_json))
         generateResumePDF(resume_json)
         # 
@@ -178,6 +179,7 @@ STRICT OUTPUT RULES:
 
 
 STRICT CONSTRAINTS:
+- TOTAL CHARACTER IN RESPONSE: 2800 - 3100 character
 - Profile Summary length: 350–450 characters
 - Skills section total length: 650-750 characters
 - Skills must contain EXACTLY 5 categories
