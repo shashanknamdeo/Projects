@@ -184,16 +184,16 @@ STRICT CONSTRAINTS:
 - Skills section total length: 650-750 characters
 - Skills must contain EXACTLY 5 categories
 - Each skills category must contain at least 5-7 skills
-- EXPERIENCE Section: Total 2300-2500 characters
+- EXPERIENCE Section: Total 2100-2300 characters
 - Project highlights: 3-4 highlights per project
 - Use ONLY these project:
+  - NeuroLearn – AI-Based Personalized Learning Platform
   - HireIQ – AI-Driven Job Application Automation Platform
   - IntelliTrade – Automated Trading & Analytics System
-  - NeuroLearn – AI-Based Personalized Learning Platform
 
 
 Output Format :
-{"profile_summary": "","skills": {"Skill_Types (First alphabet capital)" : ["Skill_1", "Skill_2"]},"experience": {"role": "Software Engineer – Project Experience","type": "Independent & Academic Projects","location": "Bhopal, India","duration": "2022 – Present","projects": [{"name": "HireIQ – AI-Driven Job Application Automation Platform","technologies": [],"highlights": []},{"name": "IntelliTrade – Automated Trading & Analytics System","technologies": [],"highlights": []},{"name": "NeuroLearn – AI-Based Personalized Learning Platform","technologies": [],"highlights": []},]}}
+{"profile_summary": "","skills": {"Skill_Types (First alphabet capital)" : ["Skill_1", "Skill_2"]},"experience": {"role": "Software Engineer – Project Experience","type": "Independent & Academic Projects","location": "Bhopal, India","duration": "2022 – Present","projects": [{"name": "NeuroLearn – AI-Based Personalized Learning Platform","technologies": [],"highlights": []},{"name": "HireIQ – AI-Driven Job Application Automation Platform","technologies": [],"highlights": []},{"name": "IntelliTrade – Automated Trading & Analytics System","technologies": [],"highlights": []},]}}
 
 ---
 Profile Summary:
@@ -218,29 +218,29 @@ Duration: 2022 – Present
 
 Projects:
 
-1. HireIQ – AI-Driven Job Application Automation Platform  
-Technologies: Python, Django, Selenium, Generative AI (Gemini), Prompt Engineering, PostgreSQL, AWS RDS, AWS Elastic Beanstalk  
+1. NeuroLearn – AI-Based Personalized Learning Platform  
+Technologies: Generative AI , Python, Django, DRF, React, Prompt Engineering, AWS, PostgreSQL  
+Highlights:
+- Architected an AI-driven platform delivering personalized study plans based on learner goals and performance.
+- Applied AI/ML techniques to dynamically adapt learning paths and improve engagement.
+- Built a scalable Django backend with PostgreSQL, including validation, optimization, and secure APIs.
+- Developed RESTful APIs and a React-based frontend for seamless user experience.
+
+2. HireIQ – AI-Driven Job Application Automation Platform  
+Technologies: Python, Django, Selenium, Generative AI , Prompt Engineering, PostgreSQL, AWS RDS, AWS Elastic Beanstalk  
 Highlights:
 - Built an end-to-end job automation pipeline for job discovery, analysis, and application, reducing manual effort by 70–80%.
 - Implemented a Python–Django multi-worker architecture for scraping, resume matching, and apply-flow detection using Generative AI and prompt engineering for JD scoring.
 - Designed secure RESTful APIs with authentication, authorization, logging, retries, and fault-tolerant workflows.
 - Deployed on AWS with PostgreSQL-backed persistence, ensuring scalability and restart-safe operations.
 
-2. IntelliTrade – Automated Trading & Analytics System  
+3. IntelliTrade – Automated Trading & Analytics System  
 Technologies: Python, Django, AI/ML, Data Analysis, Kotak Securities API, Zerodha API, AWS  
 Highlights:
 - Developed an AI-powered algorithmic trading platform supporting equities and derivatives trading.
 - Integrated Kotak Securities API for trade execution and Zerodha API for real-time market data ingestion.
 - Built Django-based RESTful services for live data processing, strategy execution, and performance tracking.
 - Deployed on AWS for scalable, low-latency processing and secure data management.
-
-3. NeuroLearn – AI-Based Personalized Learning Platform  
-Technologies: Generative AI (Gemini), Django, React, Prompt Engineering, AWS, PostgreSQL  
-Highlights:
-- Architected an AI-driven platform delivering personalized study plans based on learner goals and performance.
-- Applied AI/ML techniques to dynamically adapt learning paths and improve engagement.
-- Built a scalable Django backend with PostgreSQL, including validation, optimization, and secure APIs.
-- Developed RESTful APIs and a React-based frontend for seamless user experience.
 
 ---
 
