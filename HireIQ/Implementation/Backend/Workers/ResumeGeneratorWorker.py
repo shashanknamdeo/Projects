@@ -219,7 +219,7 @@ Duration: 2022 – Present
 Projects:
 
 1. NeuroLearn – AI-Based Personalized Learning Platform  
-Technologies: Generative AI , Python, Django, DRF, React, Prompt Engineering, AWS, PostgreSQL  
+Technologies: Generative AI , Python, Javascript, Django, DRF, React, Prompt Engineering, AWS, PostgreSQL  
 Highlights:
 - Architected an AI-driven platform delivering personalized study plans based on learner goals and performance.
 - Applied AI/ML techniques to dynamically adapt learning paths and improve engagement.
