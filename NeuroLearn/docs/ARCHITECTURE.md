@@ -53,5 +53,3 @@ The system uses a relational PostgreSQL database. The core logic revolves around
 - **`QuizQuestion`**: AI-generated assessment tailored to the sub-session content.
 - **`QuizAttempt`**: Tracks user performance and triggers the **`AI_EXPLANATION`** engine for mistakes.
 
----
-*Documentation generated for NeuroLearn Showcase Preparation.*
