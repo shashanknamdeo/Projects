@@ -265,4 +265,3 @@ main(prompt)
 #    - Follow the same structure as the input JSON.  
 #    - Ensure **ATS-friendly formatting** with clear tech keywords.  
 #    - All fields are preserved but adjusted for JD relevance.  
-
