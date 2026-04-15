@@ -202,7 +202,7 @@ Entry-level Software Engineer and AI/ML undergraduate with hands-on experience i
 ---
 
 Skills:
-- Python, Django, RESTful APIs, API Integration, Backend Architecture, Automation, Selenium, React Native, React, HTML, CSS, JavaScript, TypeScript
+- Python, Django, FastAPI, RESTful APIs, API Integration, Backend Architecture, Automation, Selenium, React Native, React, HTML, CSS, JavaScript, TypeScript
 - AWS EC2, AWS RDS, AWS S3, AWS IAM, AWS Elastic Beanstalk, AWS CloudWatch, Docker, Cloud Deployment, Environment Configuration, Scalable Systems
 - PostgreSQL, MongoDB, SQL, Data Modeling, Query Optimization
 - AI/ML Concepts, Generative AI (Gemini), Prompt Engineering, AI-driven automation, Data Analysis, Algorithmic Logic
